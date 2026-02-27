@@ -1,12 +1,11 @@
 import csv
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from io import StringIO
 
 from flask import Blueprint, redirect, render_template, request, url_for
 from sqlalchemy import func, or_
 
 from .models import Colaborador, EnxovalItem, Movimentacao, Setor, TipoPeca, db
-
 
 STATUS_OPTIONS = [
     "estoque",
@@ -85,9 +84,9 @@ def index():
 
         # Handle new tipo peca creation
         if nome == "__novo__" and novo_tipo_nome:
-            existente = (
-                TipoPeca.query.filter(func.lower(TipoPeca.nome) == novo_tipo_nome.lower()).one_or_none()
-            )
+            existente = TipoPeca.query.filter(
+                func.lower(TipoPeca.nome) == novo_tipo_nome.lower()
+            ).one_or_none()
             if existente:
                 if not existente.ativo:
                     existente.ativo = True
@@ -102,10 +101,12 @@ def index():
 
         # Handle new colaborador creation
         if colaborador == "__novo__" and novo_colaborador_nome:
-            novo_colaborador_telefone = (request.form.get("novo_colaborador_telefone") or "").strip() or None
-            existente = (
-                Colaborador.query.filter(func.lower(Colaborador.nome) == novo_colaborador_nome.lower()).one_or_none()
-            )
+            novo_colaborador_telefone = (
+                request.form.get("novo_colaborador_telefone") or ""
+            ).strip() or None
+            existente = Colaborador.query.filter(
+                func.lower(Colaborador.nome) == novo_colaborador_nome.lower()
+            ).one_or_none()
             if existente:
                 if not existente.ativo:
                     existente.ativo = True
@@ -114,16 +115,19 @@ def index():
                     db.session.commit()
                 colaborador = existente.nome
             else:
-                novo_colaborador = Colaborador(nome=novo_colaborador_nome, telefone=novo_colaborador_telefone)
+                novo_colaborador = Colaborador(
+                    nome=novo_colaborador_nome,
+                    telefone=novo_colaborador_telefone,
+                )
                 db.session.add(novo_colaborador)
                 db.session.commit()
                 colaborador = novo_colaborador.nome
 
         # Handle new sector creation
         if setor == "__novo__" and novo_setor_nome:
-            existente = (
-                Setor.query.filter(func.lower(Setor.nome) == novo_setor_nome.lower()).one_or_none()
-            )
+            existente = Setor.query.filter(
+                func.lower(Setor.nome) == novo_setor_nome.lower()
+            ).one_or_none()
             if existente:
                 if not existente.ativo:
                     existente.ativo = True
@@ -178,7 +182,9 @@ def index():
         itens_query = itens_query.filter(EnxovalItem.status == filtro_status)
     if filtro_setor:
         if filtro_setor == "__sem__":
-            itens_query = itens_query.filter(or_(EnxovalItem.setor.is_(None), EnxovalItem.setor == ""))
+            itens_query = itens_query.filter(
+                or_(EnxovalItem.setor.is_(None), EnxovalItem.setor == "")
+            )
         else:
             itens_query = itens_query.filter(EnxovalItem.setor == filtro_setor)
     if filtro_colaborador:
@@ -241,7 +247,7 @@ def index():
         .filter(EnxovalItem.ativo.is_(True), EnxovalItem.status.in_(ALERT_STATUS))
         .all()
     )
-    agora = datetime.now(timezone.utc)
+    agora = datetime.now(UTC)
     alerta_total = {"atencao": 0, "critico": 0}
     alerta_por_setor: dict[str, dict[str, int]] = {}
     alerta_por_colaborador: dict[str, dict[str, int]] = {}
@@ -250,7 +256,7 @@ def index():
         if not ultima_mov:
             continue
         if ultima_mov.tzinfo is None:
-            ultima_mov = ultima_mov.replace(tzinfo=timezone.utc)
+            ultima_mov = ultima_mov.replace(tzinfo=UTC)
         dias = (agora - ultima_mov).days
         nivel = None
         if dias > ALERT_CRITICO_DIAS:
@@ -301,12 +307,18 @@ def index():
         )
         acumulado = fim
     status_conic = (
-        f"conic-gradient({', '.join(segmentos)})" if segmentos else "conic-gradient(#e2e8f0 0% 100%)"
+        f"conic-gradient({', '.join(segmentos)})"
+        if segmentos
+        else "conic-gradient(#e2e8f0 0% 100%)"
     )
     max_tipo = max((total for _, total in por_tipo), default=1)
     max_setor = max((total for _, total in por_setor), default=1)
-    tipos_peca_ativos = TipoPeca.query.filter_by(ativo=True).order_by(TipoPeca.nome.asc()).all()
-    colaboradores_ativos = Colaborador.query.filter_by(ativo=True).order_by(Colaborador.nome.asc()).all()
+    tipos_peca_ativos = TipoPeca.query.filter_by(
+        ativo=True
+    ).order_by(TipoPeca.nome.asc()).all()
+    colaboradores_ativos = Colaborador.query.filter_by(
+        ativo=True
+    ).order_by(Colaborador.nome.asc()).all()
     setores_ativos = Setor.query.filter_by(ativo=True).order_by(Setor.nome.asc()).all()
     setores = Setor.query.order_by(Setor.nome.asc()).all()
     return render_template(
@@ -554,7 +566,7 @@ def seed_tipos_peca():
         "Calças azuis",
         "Calças cinzas",
     ]
-    
+
     for tipo_nome in tipos_padrao:
         existente = TipoPeca.query.filter(
             func.lower(TipoPeca.nome) == tipo_nome.lower()
@@ -562,5 +574,5 @@ def seed_tipos_peca():
         if not existente:
             novo_tipo = TipoPeca(nome=tipo_nome, ativo=True)
             db.session.add(novo_tipo)
-    
+
     db.session.commit()
