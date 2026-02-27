@@ -162,8 +162,78 @@
         font-size: 12px;
         font-weight: 600;
       }
+      .badge.alerta {
+        background: #fef3c7;
+        color: #b45309;
+      }
+      .badge.critico {
+        background: #fee2e2;
+        color: #b91c1c;
+      }
       .muted {
         color: var(--muted);
+      }
+      .alert-grid {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      }
+      .chart-grid {
+        display: grid;
+        gap: 18px;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      }
+      .donut {
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        margin: 8px auto 16px;
+        position: relative;
+      }
+      .donut::after {
+        content: "";
+        position: absolute;
+        inset: 26px;
+        background: var(--panel);
+        border-radius: 50%;
+      }
+      .legend {
+        display: grid;
+        gap: 6px;
+      }
+      .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .legend-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        display: inline-block;
+      }
+      .bar-row {
+        display: grid;
+        gap: 8px;
+        margin-top: 8px;
+      }
+      .bar-label {
+        display: flex;
+        justify-content: space-between;
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .bar-track {
+        height: 10px;
+        border-radius: 999px;
+        background: #ebe3d6;
+        overflow: hidden;
+      }
+      .bar-fill {
+        height: 100%;
+        background: var(--accent);
       }
     </style>
   </head>
@@ -177,5 +247,23 @@
     <main class="container">
       {% block content %}{% endblock %}
     </main>
+    <script>
+      document.querySelectorAll(".donut").forEach((el) => {
+        const conic = el.dataset.conic;
+        if (conic) {
+          el.style.background = conic;
+        }
+      });
+      document.querySelectorAll(".legend-dot").forEach((el) => {
+        const color = el.dataset.color;
+        if (color) {
+          el.style.background = color;
+        }
+      });
+      document.querySelectorAll(".bar-fill").forEach((el) => {
+        const width = Number(el.dataset.width || 0);
+        el.style.width = `${Math.min(Math.max(width, 0), 100)}%`;
+      });
+    </script>
   </body>
 </html>

@@ -1,4 +1,5 @@
 import csv
+from datetime import datetime, timezone
 from io import StringIO
 
 from flask import Blueprint, redirect, render_template, request, url_for
@@ -15,6 +16,17 @@ STATUS_OPTIONS = [
     "disponivel",
     "extraviado",
 ]
+ALERT_STATUS = {"entregue", "em_uso"}
+ALERT_ATENCAO_DIAS = 2
+ALERT_CRITICO_DIAS = 4
+STATUS_COLORS = {
+    "estoque": "#2d6a4f",
+    "entregue": "#d97706",
+    "em_uso": "#2563eb",
+    "em_lavagem": "#0ea5e9",
+    "disponivel": "#14b8a6",
+    "extraviado": "#dc2626",
+}
 
 
 main_bp = Blueprint("main", __name__)
@@ -114,6 +126,85 @@ def index():
         .order_by(EnxovalItem.setor.asc())
         .all()
     )
+
+    ultima_mov_subquery = (
+        db.session.query(
+            Movimentacao.item_id,
+            func.max(Movimentacao.created_at).label("ultima_mov"),
+        )
+        .group_by(Movimentacao.item_id)
+        .subquery()
+    )
+    itens_alerta = (
+        db.session.query(EnxovalItem, ultima_mov_subquery.c.ultima_mov)
+        .join(ultima_mov_subquery, EnxovalItem.id == ultima_mov_subquery.c.item_id)
+        .filter(EnxovalItem.ativo.is_(True), EnxovalItem.status.in_(ALERT_STATUS))
+        .all()
+    )
+    agora = datetime.now(timezone.utc)
+    alerta_total = {"atencao": 0, "critico": 0}
+    alerta_por_setor: dict[str, dict[str, int]] = {}
+    alerta_por_colaborador: dict[str, dict[str, int]] = {}
+
+    for item, ultima_mov in itens_alerta:
+        if not ultima_mov:
+            continue
+        if ultima_mov.tzinfo is None:
+            ultima_mov = ultima_mov.replace(tzinfo=timezone.utc)
+        dias = (agora - ultima_mov).days
+        nivel = None
+        if dias > ALERT_CRITICO_DIAS:
+            nivel = "critico"
+        elif dias > ALERT_ATENCAO_DIAS:
+            nivel = "atencao"
+        if not nivel:
+            continue
+
+        alerta_total[nivel] += 1
+        setor = item.setor or "Sem setor"
+        colaborador = item.colaborador or "Sem colaborador"
+        alerta_por_setor.setdefault(setor, {"atencao": 0, "critico": 0})[nivel] += 1
+        alerta_por_colaborador.setdefault(colaborador, {"atencao": 0, "critico": 0})[nivel] += 1
+
+    def _ordenar_alertas(dados: dict[str, dict[str, int]]) -> list[tuple[str, int, int, int]]:
+        resultado = []
+        for chave, valores in dados.items():
+            atencao = valores.get("atencao", 0)
+            critico = valores.get("critico", 0)
+            resultado.append((chave, atencao, critico, atencao + critico))
+        return sorted(resultado, key=lambda item: item[3], reverse=True)
+
+    alertas_setor = _ordenar_alertas(alerta_por_setor)
+    alertas_colaborador = _ordenar_alertas(alerta_por_colaborador)
+
+    status_chart = []
+    total_status = sum(status_counts.values()) or 1
+    acumulado = 0.0
+    segmentos = []
+    for status in STATUS_OPTIONS:
+        quantidade = status_counts.get(status, 0)
+        if quantidade == 0:
+            continue
+        percentual = (quantidade / total_status) * 100
+        status_chart.append(
+            {
+                "status": status,
+                "quantidade": quantidade,
+                "percentual": percentual,
+                "color": STATUS_COLORS.get(status, "#94a3b8"),
+            }
+        )
+        inicio = acumulado
+        fim = acumulado + percentual
+        segmentos.append(
+            f"{STATUS_COLORS.get(status, '#94a3b8')} {inicio:.2f}% {fim:.2f}%"
+        )
+        acumulado = fim
+    status_conic = (
+        f"conic-gradient({', '.join(segmentos)})" if segmentos else "conic-gradient(#e2e8f0 0% 100%)"
+    )
+    max_tipo = max((total for _, total in por_tipo), default=1)
+    max_setor = max((total for _, total in por_setor), default=1)
     return render_template(
         "index.html",
         itens=itens,
@@ -124,6 +215,13 @@ def index():
         total_ativos=total_ativos,
         por_tipo=por_tipo,
         por_setor=por_setor,
+        alerta_total=alerta_total,
+        alertas_setor=alertas_setor,
+        alertas_colaborador=alertas_colaborador,
+        status_chart=status_chart,
+        status_conic=status_conic,
+        max_tipo=max_tipo,
+        max_setor=max_setor,
     )
 
 

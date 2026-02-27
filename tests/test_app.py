@@ -1,5 +1,6 @@
 import io
 import unittest
+from datetime import datetime, timedelta, timezone
 
 from app import create_app
 from app.models import EnxovalItem, Movimentacao, db
@@ -62,6 +63,42 @@ class EnxovalAppTestCase(unittest.TestCase):
             self.assertEqual(resposta.status_code, 302)
             item = EnxovalItem.query.filter_by(codigo="CN-0001").first()
             self.assertIsNotNone(item)
+
+    def test_alertas_por_dias(self) -> None:
+        agora = datetime.now(timezone.utc)
+        with self.app.app_context():
+            item_atencao = EnxovalItem(
+                nome="Bata",
+                codigo="BA-0001",
+                tamanho="M",
+                status="entregue",
+            )
+            item_critico = EnxovalItem(
+                nome="Calca",
+                codigo="CA-0001",
+                tamanho="G",
+                status="em_uso",
+            )
+            db.session.add_all([item_atencao, item_critico])
+            db.session.flush()
+            db.session.add_all(
+                [
+                    Movimentacao(
+                        item=item_atencao,
+                        status="entregue",
+                        created_at=agora - timedelta(days=3),
+                    ),
+                    Movimentacao(
+                        item=item_critico,
+                        status="em_uso",
+                        created_at=agora - timedelta(days=5),
+                    ),
+                ]
+            )
+            db.session.commit()
+
+            resposta = self.client.get("/")
+            self.assertEqual(resposta.status_code, 200)
 
 
 if __name__ == "__main__":

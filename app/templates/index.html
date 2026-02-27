@@ -24,6 +24,121 @@
       Passo a passo: 1) cadastre as peças, 2) registre cada movimentação, 3) acompanhe pendências e perdas.
     </p>
     <section class="card">
+      <h3>Alertas automáticos</h3>
+      <p class="helper">Peças em uso/entregues sem movimentação há mais de 2 dias.</p>
+      <div class="alert-grid">
+        <div class="summary-card">
+          <span class="label">Atenção (2+ dias)</span>
+          <strong class="badge alerta">{{ alerta_total.atencao }}</strong>
+        </div>
+        <div class="summary-card">
+          <span class="label">Crítico (4+ dias)</span>
+          <strong class="badge critico">{{ alerta_total.critico }}</strong>
+        </div>
+      </div>
+      <div class="grid">
+        <section class="card">
+          <h4>Por setor</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Setor</th>
+                <th>Atenção</th>
+                <th>Crítico</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for setor, atencao, critico, total in alertas_setor %}
+                <tr>
+                  <td>{{ setor }}</td>
+                  <td>{{ atencao }}</td>
+                  <td>{{ critico }}</td>
+                  <td>{{ total }}</td>
+                </tr>
+              {% else %}
+                <tr>
+                  <td colspan="4" class="muted">Sem alertas no momento.</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </section>
+        <section class="card">
+          <h4>Por colaborador</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Colaborador</th>
+                <th>Atenção</th>
+                <th>Crítico</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for colaborador, atencao, critico, total in alertas_colaborador %}
+                <tr>
+                  <td>{{ colaborador }}</td>
+                  <td>{{ atencao }}</td>
+                  <td>{{ critico }}</td>
+                  <td>{{ total }}</td>
+                </tr>
+              {% else %}
+                <tr>
+                  <td colspan="4" class="muted">Sem alertas no momento.</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </section>
+      </div>
+    </section>
+    <section class="card">
+      <h3>Dashboard com gráficos</h3>
+      <div class="chart-grid">
+        <section class="card">
+          <h4>Status do enxoval</h4>
+          <div class="donut" data-conic="{{ status_conic }}"></div>
+          <div class="legend">
+            {% for item in status_chart %}
+              <div class="legend-item">
+                <span class="legend-dot" data-color="{{ item.color }}"></span>
+                <span>{{ item.status|replace('_', ' ') }} ({{ item.quantidade }})</span>
+              </div>
+            {% endfor %}
+          </div>
+        </section>
+        <section class="card">
+          <h4>Por tipo</h4>
+          {% for tipo, total in por_tipo %}
+            <div class="bar-row">
+              <div class="bar-label">
+                <span>{{ tipo }}</span>
+                <span>{{ total }}</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill" data-width="{{ (total / max_tipo) * 100 }}"></div>
+              </div>
+            </div>
+          {% endfor %}
+        </section>
+        <section class="card">
+          <h4>Por setor</h4>
+          {% for setor, total in por_setor %}
+            <div class="bar-row">
+              <div class="bar-label">
+                <span>{{ setor or 'Sem setor' }}</span>
+                <span>{{ total }}</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill" data-width="{{ (total / max_setor) * 100 }}"></div>
+              </div>
+            </div>
+          {% endfor %}
+        </section>
+      </div>
+    </section>
+    <section class="card">
       <h3>Inventário por tipo</h3>
       <p class="helper">Mostra quantas peças ativas existem por tipo (moletom, calça, bata...).</p>
       <table>
