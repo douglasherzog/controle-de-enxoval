@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block title %}Etiqueta - {{ item.codigo }}{% endblock %}
+
+{% block content %}
+  <div class="container etiqueta-container">
+    <div class="etiqueta">
+      <h2>{{ item.codigo }}</h2>
+      <p><strong>{{ item.nome }}</strong></p>
+      <p>Tamanho: {{ item.tamanho }}</p>
+      {% if item.tag_rfid %}
+        <p>RFID: {{ item.tag_rfid }}</p>
+      {% endif %}
+      <img src="{{ url_for('main.gerar_qrcode', item_id=item.id) }}" alt="QR Code" class="qrcode">
+    </div>
+
+    <div class="actions no-print">
+      <a href="{{ url_for('main.index') }}" class="back-link">← Voltar</a>
+      <button onclick="window.print()" class="button">🖨️ Imprimir Etiqueta</button>
+    </div>
+  </div>
+
+  <style>
+    @media print {
+      .no-print {
+        display: none !important;
+      }
+      .etiqueta {
+        border: 2px solid #333;
+        padding: 20px;
+        width: 300px;
+        text-align: center;
+        page-break-after: always;
+      }
+      .etiqueta h2 {
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+      .etiqueta p {
+        margin: 5px 0;
+      }
+      .qrcode {
+        width: 150px;
+        height: 150px;
+        margin-top: 15px;
+      }
+    }
+
+    @media screen {
+      .etiqueta-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px;
+      }
+      .etiqueta {
+        border: 2px solid #ddd;
+        padding: 40px;
+        width: 350px;
+        text-align: center;
+        background: white;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        margin-bottom: 30px;
+      }
+      .etiqueta h2 {
+        font-size: 32px;
+        margin-bottom: 15px;
+        color: #2d6a4f;
+      }
+      .etiqueta p {
+        margin: 10px 0;
+        font-size: 18px;
+      }
+      .qrcode {
+        width: 200px;
+        height: 200px;
+        margin-top: 20px;
+      }
+      .actions {
+        display: flex;
+        gap: 15px;
+      }
+    }
+  </style>
+{% endblock %}

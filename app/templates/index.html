@@ -194,6 +194,16 @@
     </section>
 
     <section class="card span-full">
+      <h3>Relatórios Periódicos</h3>
+      <p class="helper">Gere relatórios de status para acompanhamento.</p>
+      <div class="actions">
+        <a href="{{ url_for('main.relatorio_status', periodo='diario') }}" class="button">📊 Diário</a>
+        <a href="{{ url_for('main.relatorio_status', periodo='semanal') }}" class="button">📈 Semanal</a>
+        <a href="{{ url_for('main.relatorio_status', periodo='mensal') }}" class="button">📉 Mensal</a>
+      </div>
+    </section>
+
+    <section class="card span-full">
       <h3>Importar enxoval (CSV)</h3>
       <p class="helper">Use quando tiver muitas peças para cadastrar de uma vez.</p>
       <form method="post" action="{{ url_for('main.importar_csv') }}" enctype="multipart/form-data">
@@ -346,7 +356,8 @@
                   <strong>{{ item.nome }}</strong><br>
                   <span class="muted">{{ item.tamanho }}{% if item.colaborador %} · {{ item.colaborador }}{% endif %}{% if item.setor %} · {{ item.setor }}{% endif %}</span>
                   <div>
-                    <a class="back-link" href="{{ url_for('main.item_detalhe', item_id=item.id) }}">Ver histórico</a>
+                    <a class="back-link" href="{{ url_for('main.item_detalhe', item_id=item.id) }}">Ver histórico</a> |
+                    <a class="back-link" href="{{ url_for('main.etiqueta_item', item_id=item.id) }}" target="_blank">🖨️ Etiqueta</a>
                   </div>
                 </td>
                 <td>

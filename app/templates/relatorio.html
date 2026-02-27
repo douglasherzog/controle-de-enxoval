@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ titulo }} - Controle de Enxoval{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h1>{{ titulo }}</h1>
+    <p class="muted">
+      Período: {{ data_inicio.strftime('%d/%m/%Y %H:%M') }} até {{ data_fim.strftime('%d/%m/%Y %H:%M') }}
+    </p>
+
+    <div class="grid cols-3">
+      <div class="stat-box">
+        <h2>{{ total_ativos }}</h2>
+        <p>Peças ativas no sistema</p>
+      </div>
+      <div class="stat-box alerta">
+        <h2>{{ alertas|length }}</h2>
+        <p>Peças com alerta de atraso</p>
+      </div>
+      <div class="stat-box">
+        <h2>{{ movimentacoes|length }}</h2>
+        <p>Movimentações no período</p>
+      </div>
+    </div>
+
+    <section class="card">
+      <h3>Status das Peças</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Quantidade</th>
+            <th>Percentual</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for status in status_options %}
+            {% set count = status_counts.get(status, 0) %}
+            {% if count > 0 %}
+              <tr>
+                <td>
+                  <span class="badge" style="background-color: {{ status_colors.get(status, '#94a3b8') }}">
+                    {{ status|replace('_', ' ') }}
+                  </span>
+                </td>
+                <td>{{ count }}</td>
+                <td>{{ "%.1f"|format((count / total_ativos) * 100) }}%</td>
+              </tr>
+            {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+
+    {% if alertas %}
+      <section class="card alerta">
+        <h3>⚠️ Peças com Alerta de Atraso</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Tipo</th>
+              <th>Colaborador</th>
+              <th>Setor</th>
+              <th>Dias em Atraso</th>
+              <th>Nível</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item, dias, nivel in alertas %}
+              <tr class="{{ nivel }}">
+                <td>{{ item.codigo }}</td>
+                <td>{{ item.nome }}</td>
+                <td>{{ item.colaborador or '-' }}</td>
+                <td>{{ item.setor or '-' }}</td>
+                <td>{{ dias }} dias</td>
+                <td>
+                  {% if nivel == 'critico' %}
+                    <span class="badge critico">Crítico</span>
+                  {% else %}
+                    <span class="badge atencao">Atenção</span>
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </section>
+    {% endif %}
+
+    <div class="grid cols-2">
+      <section class="card">
+        <h3>Top 10 Tipos de Peça</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Tipo</th>
+              <th>Quantidade</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for tipo, total in por_tipo %}
+              <tr>
+                <td>{{ tipo }}</td>
+                <td>{{ total }}</td>
+              </tr>
+            {% else %}
+              <tr>
+                <td colspan="2" class="muted">Sem dados.</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </section>
+
+      <section class="card">
+        <h3>Top 10 Setores</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Setor</th>
+              <th>Quantidade</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for setor, total in por_setor %}
+              <tr>
+                <td>{{ setor or 'Sem setor' }}</td>
+                <td>{{ total }}</td>
+              </tr>
+            {% else %}
+              <tr>
+                <td colspan="2" class="muted">Sem dados.</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </section>
+    </div>
+
+    {% if movimentacoes %}
+      <section class="card">
+        <h3>Movimentações Recentes</h3>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Peça</th>
+                <th>Status</th>
+                <th>Colaborador</th>
+                <th>Setor</th>
+                <th>Observação</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for mov in movimentacoes[:20] %}
+                <tr>
+                  <td>{{ mov.created_at.strftime('%d/%m/%Y %H:%M') }}</td>
+                  <td>{{ mov.item.codigo }} - {{ mov.item.nome }}</td>
+                  <td>
+                    <span class="badge" style="background-color: {{ status_colors.get(mov.status, '#94a3b8') }}">
+                      {{ mov.status|replace('_', ' ') }}
+                    </span>
+                  </td>
+                  <td>{{ mov.colaborador or '-' }}</td>
+                  <td>{{ mov.setor or '-' }}</td>
+                  <td>{{ mov.observacao or '-' }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    {% endif %}
+
+    <div class="actions">
+      <a href="{{ url_for('main.index') }}" class="back-link">← Voltar ao Dashboard</a>
+      <a href="{{ url_for('main.relatorio_status', periodo='diario') }}" class="button">Relatório Diário</a>
+      <a href="{{ url_for('main.relatorio_status', periodo='semanal') }}" class="button">Relatório Semanal</a>
+      <a href="{{ url_for('main.relatorio_status', periodo='mensal') }}" class="button">Relatório Mensal</a>
+    </div>
+  </div>
+{% endblock %}

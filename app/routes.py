@@ -1,8 +1,10 @@
 import csv
+import io
 from datetime import UTC, datetime
 from io import StringIO
 
-from flask import Blueprint, redirect, render_template, request, url_for
+import qrcode
+from flask import Blueprint, redirect, render_template, request, send_file, url_for
 from sqlalchemy import func, or_
 
 from .models import Colaborador, EnxovalItem, Movimentacao, Setor, TipoPeca, db
@@ -547,6 +549,111 @@ def inativar_colaborador(colaborador_id: int):
     return redirect(url_for("main.index"))
 
 
+@main_bp.route("/relatorio/<periodo>")
+def relatorio_status(periodo: str):
+    """Gera relatório de status (diario, semanal, mensal)."""
+    from datetime import timedelta
+
+    agora = datetime.now(UTC)
+
+    if periodo == "diario":
+        data_inicio = agora - timedelta(days=1)
+        titulo = "Relatório Diário"
+    elif periodo == "semanal":
+        data_inicio = agora - timedelta(weeks=1)
+        titulo = "Relatório Semanal"
+    elif periodo == "mensal":
+        data_inicio = agora - timedelta(days=30)
+        titulo = "Relatório Mensal"
+    else:
+        return redirect(url_for("main.index"))
+
+    # Estatísticas gerais
+    status_counts = dict(
+        db.session.query(EnxovalItem.status, func.count(EnxovalItem.id))
+        .filter(EnxovalItem.ativo.is_(True))
+        .group_by(EnxovalItem.status)
+        .all()
+    )
+
+    # Movimentações no período
+    movimentacoes = (
+        Movimentacao.query.filter(Movimentacao.created_at >= data_inicio)
+        .order_by(Movimentacao.created_at.desc())
+        .limit(100)
+        .all()
+    )
+
+    # Itens com alerta
+    ultima_mov_subquery = (
+        db.session.query(
+            Movimentacao.item_id,
+            func.max(Movimentacao.created_at).label("ultima_mov"),
+        )
+        .group_by(Movimentacao.item_id)
+        .subquery()
+    )
+
+    itens_alerta = (
+        db.session.query(EnxovalItem, ultima_mov_subquery.c.ultima_mov)
+        .join(ultima_mov_subquery, EnxovalItem.id == ultima_mov_subquery.c.item_id)
+        .filter(
+            EnxovalItem.ativo.is_(True),
+            EnxovalItem.status.in_(ALERT_STATUS),
+        )
+        .all()
+    )
+
+    alertas = []
+    for item, ultima_mov in itens_alerta:
+        if not ultima_mov:
+            continue
+        if ultima_mov.tzinfo is None:
+            ultima_mov = ultima_mov.replace(tzinfo=UTC)
+        dias = (agora - ultima_mov).days
+        if dias > ALERT_CRITICO_DIAS:
+            alertas.append((item, dias, "critico"))
+        elif dias > ALERT_ATENCAO_DIAS:
+            alertas.append((item, dias, "atencao"))
+
+    # Agrupar por tipo e setor
+    por_tipo = (
+        db.session.query(EnxovalItem.nome, func.count(EnxovalItem.id))
+        .filter(EnxovalItem.ativo.is_(True))
+        .group_by(EnxovalItem.nome)
+        .order_by(func.count(EnxovalItem.id).desc())
+        .limit(10)
+        .all()
+    )
+
+    por_setor = (
+        db.session.query(EnxovalItem.setor, func.count(EnxovalItem.id))
+        .filter(EnxovalItem.ativo.is_(True))
+        .group_by(EnxovalItem.setor)
+        .order_by(func.count(EnxovalItem.id).desc())
+        .limit(10)
+        .all()
+    )
+
+    total_ativos = sum(status_counts.values())
+
+    return render_template(
+        "relatorio.html",
+        titulo=titulo,
+        periodo=periodo,
+        data_inicio=data_inicio,
+        data_fim=agora,
+        status_counts=status_counts,
+        total_ativos=total_ativos,
+        movimentacoes=movimentacoes,
+        alertas=alertas,
+        por_tipo=por_tipo,
+        por_setor=por_setor,
+        status_options=STATUS_OPTIONS,
+        status_colors=STATUS_COLORS,
+    )
+
+
 def seed_tipos_peca():
     """Pré-cadastra os tipos de peças padrão do frigorífico."""
     tipos_padrao = [
@@ -576,3 +683,50 @@ def seed_tipos_peca():
             db.session.add(novo_tipo)
 
     db.session.commit()
+
+
+@main_bp.route("/qrcode/<int:item_id>")
+def gerar_qrcode(item_id: int):
+    """Gera QR code para uma peça específica."""
+    item = db.session.get(EnxovalItem, item_id)
+    if not item:
+        return redirect(url_for("main.index"))
+
+    # Dados para o QR code
+    dados = f"CODIGO:{item.codigo}|TIPO:{item.nome}|TAMANHO:{item.tamanho}"
+    if item.tag_rfid:
+        dados += f"|RFID:{item.tag_rfid}"
+
+    # Gerar QR code
+    qr = qrcode.QRCode(
+        version=1,
+        error_correction=qrcode.constants.ERROR_CORRECT_L,
+        box_size=10,
+        border=4,
+    )
+    qr.add_data(dados)
+    qr.make(fit=True)
+
+    # Criar imagem
+    img = qr.make_image(fill_color="black", back_color="white")
+
+    # Salvar em buffer
+    img_buffer = io.BytesIO()
+    img.save(img_buffer, format="PNG")
+    img_buffer.seek(0)
+
+    return send_file(
+        img_buffer,
+        mimetype="image/png",
+        as_download=False,
+    )
+
+
+@main_bp.route("/etiqueta/<int:item_id>")
+def etiqueta_item(item_id: int):
+    """Mostra página de etiqueta para impressão."""
+    item = db.session.get(EnxovalItem, item_id)
+    if not item:
+        return redirect(url_for("main.index"))
+
+    return render_template("etiqueta.html", item=item)
