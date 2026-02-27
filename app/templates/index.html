@@ -23,7 +23,7 @@
     <p class="helper">
       Passo a passo: 1) cadastre as peças, 2) registre cada movimentação, 3) acompanhe pendências e perdas.
     </p>
-    <section class="card">
+    <section class="card span-full">
       <h3>Alertas automáticos</h3>
       <p class="helper">Peças em uso/entregues sem movimentação há mais de 2 dias.</p>
       <div class="alert-grid">
@@ -37,63 +37,68 @@
         </div>
       </div>
       <div class="grid">
-        <section class="card">
+        <section class="card span-2">
           <h4>Por setor</h4>
-          <table>
-            <thead>
-              <tr>
-                <th>Setor</th>
-                <th>Atenção</th>
-                <th>Crítico</th>
-                <th>Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for setor, atencao, critico, total in alertas_setor %}
+          <div class="alert-table-wrapper">
+            <table class="alert-table">
+              <thead>
                 <tr>
-                  <td>{{ setor }}</td>
-                  <td>{{ atencao }}</td>
-                  <td>{{ critico }}</td>
-                  <td>{{ total }}</td>
+                  <th>Setor</th>
+                  <th>Atenção</th>
+                  <th>Crítico</th>
+                  <th>Total</th>
                 </tr>
-              {% else %}
-                <tr>
-                  <td colspan="4" class="muted">Sem alertas no momento.</td>
-                </tr>
-              {% endfor %}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {% for setor, atencao, critico, total in alertas_setor %}
+                  <tr>
+                    <td>{{ setor }}</td>
+                    <td>{{ atencao }}</td>
+                    <td>{{ critico }}</td>
+                    <td>{{ total }}</td>
+                  </tr>
+                {% else %}
+                  <tr>
+                    <td colspan="4" class="muted">Sem alertas no momento.</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+              </table>
+        </div>
+          </div>
         </section>
-        <section class="card">
+        <section class="card span-2">
           <h4>Por colaborador</h4>
-          <table>
-            <thead>
-              <tr>
-                <th>Colaborador</th>
-                <th>Atenção</th>
-                <th>Crítico</th>
-                <th>Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for colaborador, atencao, critico, total in alertas_colaborador %}
+          <div class="alert-table-wrapper">
+            <table class="alert-table">
+              <thead>
                 <tr>
-                  <td>{{ colaborador }}</td>
-                  <td>{{ atencao }}</td>
-                  <td>{{ critico }}</td>
-                  <td>{{ total }}</td>
+                  <th>Colaborador</th>
+                  <th>Atenção</th>
+                  <th>Crítico</th>
+                  <th>Total</th>
                 </tr>
-              {% else %}
-                <tr>
-                  <td colspan="4" class="muted">Sem alertas no momento.</td>
-                </tr>
-              {% endfor %}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {% for colaborador, atencao, critico, total in alertas_colaborador %}
+                  <tr>
+                    <td>{{ colaborador }}</td>
+                    <td>{{ atencao }}</td>
+                    <td>{{ critico }}</td>
+                    <td>{{ total }}</td>
+                  </tr>
+                {% else %}
+                  <tr>
+                    <td colspan="4" class="muted">Sem alertas no momento.</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
         </section>
       </div>
     </section>
-    <section class="card">
+    <section class="card span-full">
       <h3>Dashboard com gráficos</h3>
       <div class="chart-grid">
         <section class="card">
@@ -138,7 +143,7 @@
         </section>
       </div>
     </section>
-    <section class="card">
+    <section class="card span-full">
       <h3>Inventário por tipo</h3>
       <p class="helper">Mostra quantas peças ativas existem por tipo (moletom, calça, bata...).</p>
       <table>
@@ -163,7 +168,7 @@
       </table>
     </section>
 
-    <section class="card">
+    <section class="card span-full">
       <h3>Inventário por setor</h3>
       <p class="helper">Ajuda a ver onde o enxoval está concentrado no frigorífico.</p>
       <table>
@@ -188,7 +193,7 @@
       </table>
     </section>
 
-    <section class="card">
+    <section class="card span-full">
       <h3>Importar enxoval (CSV)</h3>
       <p class="helper">Use quando tiver muitas peças para cadastrar de uma vez.</p>
       <form method="post" action="{{ url_for('main.importar_csv') }}" enctype="multipart/form-data">
@@ -198,7 +203,7 @@
       </form>
     </section>
 
-    <form method="post">
+    <form method="post" class="span-full">
       <span class="step">Passo 1</span>
       <p class="helper">Cadastre cada peça com código único. RFID é opcional.</p>
       <label for="nome">Nome da peça</label>
@@ -235,68 +240,122 @@
       <button type="submit">Cadastrar</button>
     </form>
 
-    <div>
-      <table>
-        <thead>
-          <tr>
-            <th>Código</th>
-            <th>Peça</th>
-            <th>Status</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for item in itens %}
+    <section class="card span-full">
+      <h3>Lista de peças</h3>
+      <p class="helper">Use filtros para encontrar rapidamente. A lista é paginada.</p>
+      <form method="get" class="filters">
+        <div>
+          <label for="busca">Busca</label>
+          <input id="busca" name="busca" value="{{ busca }}" placeholder="Ex.: MO-0001 ou moletom">
+        </div>
+        <div>
+          <label for="status">Status</label>
+          <select id="status" name="status">
+            <option value="">Todos</option>
+            {% for status in status_options %}
+              <option value="{{ status }}" {% if status == filtro_status %}selected{% endif %}>{{ status|replace('_', ' ') }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div>
+          <label for="setor-filtro">Setor</label>
+          <input id="setor-filtro" name="setor" value="{{ filtro_setor }}" placeholder="Ex.: Desossa">
+        </div>
+        <div>
+          <label for="colaborador-filtro">Colaborador</label>
+          <input id="colaborador-filtro" name="colaborador" value="{{ filtro_colaborador }}" placeholder="Ex.: João Silva">
+        </div>
+        <div>
+          <label for="por_pagina">Por página</label>
+          <select id="por_pagina" name="por_pagina">
+            {% for opcao in [10, 25, 50, 100] %}
+              <option value="{{ opcao }}" {% if opcao == por_pagina %}selected{% endif %}>{{ opcao }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="inline">
+          <input id="ativos" name="ativos" type="checkbox" value="1" {% if apenas_ativos %}checked{% endif %}>
+          <label for="ativos">Somente ativos</label>
+        </div>
+        <button type="submit">Aplicar filtros</button>
+      </form>
+
+      <div class="table-scroll">
+        <div class="main-table-wrapper">
+          <table class="main-table">
+          <thead>
             <tr>
-              <td>{{ item.codigo }}</td>
-              <td>
-                <strong>{{ item.nome }}</strong><br>
-                <span class="muted">{{ item.tamanho }}{% if item.colaborador %} · {{ item.colaborador }}{% endif %}{% if item.setor %} · {{ item.setor }}{% endif %}</span>
-                <div>
-                  <a class="back-link" href="{{ url_for('main.item_detalhe', item_id=item.id) }}">Ver histórico</a>
-                </div>
-              </td>
-              <td>
-                <span class="badge">{{ item.status|replace('_', ' ') }}</span>
-              </td>
-              <td>
-                {% if item.ativo %}
-                  <span class="step">Passo 2</span>
-                  <p class="helper">Atualize o status sempre que a peça mudar de local.</p>
-                  <form method="post" action="{{ url_for('main.inativar_item', item_id=item.id) }}">
-                    <button type="submit">Inativar</button>
-                  </form>
-                  <form method="post" action="{{ url_for('main.movimentar_item', item_id=item.id) }}">
-                    <label for="status-{{ item.id }}">Status</label>
-                    <select id="status-{{ item.id }}" name="status" required>
-                      {% for status in status_options %}
-                        <option value="{{ status }}" {% if status == item.status %}selected{% endif %}>{{ status|replace('_', ' ') }}</option>
-                      {% endfor %}
-                    </select>
-
-                    <label for="colaborador-{{ item.id }}">Colaborador</label>
-                    <input id="colaborador-{{ item.id }}" name="colaborador" value="{{ item.colaborador or '' }}">
-
-                    <label for="setor-{{ item.id }}">Setor</label>
-                    <input id="setor-{{ item.id }}" name="setor" value="{{ item.setor or '' }}">
-
-                    <label for="observacao-{{ item.id }}">Observação</label>
-                    <input id="observacao-{{ item.id }}" name="observacao" placeholder="Ex.: retirado na rouparia">
-
-                    <button type="submit">Registrar movimentação</button>
-                  </form>
-                {% else %}
-                  <span class="muted">—</span>
-                {% endif %}
-              </td>
+              <th>Código</th>
+              <th>Peça</th>
+              <th>Status</th>
+              <th>Ações</th>
             </tr>
-          {% else %}
-            <tr>
-              <td colspan="4" class="muted">Nenhum item cadastrado ainda.</td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody>
+            {% for item in itens %}
+              <tr>
+                <td>{{ item.codigo }}</td>
+                <td>
+                  <strong>{{ item.nome }}</strong><br>
+                  <span class="muted">{{ item.tamanho }}{% if item.colaborador %} · {{ item.colaborador }}{% endif %}{% if item.setor %} · {{ item.setor }}{% endif %}</span>
+                  <div>
+                    <a class="back-link" href="{{ url_for('main.item_detalhe', item_id=item.id) }}">Ver histórico</a>
+                  </div>
+                </td>
+                <td>
+                  <span class="badge">{{ item.status|replace('_', ' ') }}</span>
+                </td>
+                <td>
+                  {% if item.ativo %}
+                    <details class="movimentacao">
+                      <summary>Registrar movimentação</summary>
+                      <span class="step">Passo 2</span>
+                      <p class="helper">Atualize o status sempre que a peça mudar de local.</p>
+                      <form method="post" action="{{ url_for('main.movimentar_item', item_id=item.id) }}">
+                        <label for="status-{{ item.id }}">Status</label>
+                        <select id="status-{{ item.id }}" name="status" required>
+                          {% for status in status_options %}
+                            <option value="{{ status }}" {% if status == item.status %}selected{% endif %}>{{ status|replace('_', ' ') }}</option>
+                          {% endfor %}
+                        </select>
+
+                        <label for="colaborador-{{ item.id }}">Colaborador</label>
+                        <input id="colaborador-{{ item.id }}" name="colaborador" value="{{ item.colaborador or '' }}">
+
+                        <label for="setor-{{ item.id }}">Setor</label>
+                        <input id="setor-{{ item.id }}" name="setor" value="{{ item.setor or '' }}">
+
+                        <label for="observacao-{{ item.id }}">Observação</label>
+                        <input id="observacao-{{ item.id }}" name="observacao" placeholder="Ex.: retirado na rouparia">
+
+                        <button type="submit">Registrar movimentação</button>
+                      </form>
+                      <form method="post" action="{{ url_for('main.inativar_item', item_id=item.id) }}">
+                        <button type="submit">Inativar</button>
+                      </form>
+                    </details>
+                  {% else %}
+                    <span class="muted">—</span>
+                  {% endif %}
+                </td>
+              </tr>
+            {% else %}
+              <tr>
+                <td colspan="4" class="muted">Nenhum item encontrado.</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <div class="pagination">
+        <span>Página {{ pagina }} de {{ total_paginas }} ({{ total_itens }} itens)</span>
+        {% if pagina > 1 %}
+          <a href="{{ url_for('main.index', pagina=pagina-1, busca=busca, status=filtro_status, setor=filtro_setor, colaborador=filtro_colaborador, ativos=1 if apenas_ativos else 0, por_pagina=por_pagina) }}">Anterior</a>
+        {% endif %}
+        {% if pagina < total_paginas %}
+          <a href="{{ url_for('main.index', pagina=pagina+1, busca=busca, status=filtro_status, setor=filtro_setor, colaborador=filtro_colaborador, ativos=1 if apenas_ativos else 0, por_pagina=por_pagina) }}">Próxima</a>
+        {% endif %}
+      </div>
+    </section>
   </div>
 {% endblock %}

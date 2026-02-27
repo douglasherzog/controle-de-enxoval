@@ -97,7 +97,48 @@ def index():
         return redirect(url_for("main.index"))
 
 
-    itens = EnxovalItem.query.order_by(EnxovalItem.id.desc()).all()
+    busca = (request.args.get("busca") or "").strip()
+    filtro_status = (request.args.get("status") or "").strip()
+    filtro_setor = (request.args.get("setor") or "").strip()
+    filtro_colaborador = (request.args.get("colaborador") or "").strip()
+    apenas_ativos = request.args.get("ativos", "1") == "1"
+    try:
+        pagina = max(int(request.args.get("pagina", "1")), 1)
+    except ValueError:
+        pagina = 1
+    try:
+        por_pagina = max(int(request.args.get("por_pagina", "25")), 5)
+    except ValueError:
+        por_pagina = 25
+
+    itens_query = EnxovalItem.query
+    if apenas_ativos:
+        itens_query = itens_query.filter(EnxovalItem.ativo.is_(True))
+    if busca:
+        termo = f"%{busca}%"
+        itens_query = itens_query.filter(
+            (EnxovalItem.nome.ilike(termo)) | (EnxovalItem.codigo.ilike(termo))
+        )
+    if filtro_status:
+        itens_query = itens_query.filter(EnxovalItem.status == filtro_status)
+    if filtro_setor:
+        itens_query = itens_query.filter(EnxovalItem.setor.ilike(f"%{filtro_setor}%"))
+    if filtro_colaborador:
+        itens_query = itens_query.filter(
+            EnxovalItem.colaborador.ilike(f"%{filtro_colaborador}%")
+        )
+
+    total_itens = itens_query.count()
+    total_paginas = max((total_itens + por_pagina - 1) // por_pagina, 1)
+    if pagina > total_paginas:
+        pagina = total_paginas
+    offset = (pagina - 1) * por_pagina
+    itens = (
+        itens_query.order_by(EnxovalItem.id.desc())
+        .offset(offset)
+        .limit(por_pagina)
+        .all()
+    )
     status_counts = dict(
         db.session.query(EnxovalItem.status, func.count(EnxovalItem.id))
         .group_by(EnxovalItem.status)
@@ -222,6 +263,16 @@ def index():
         status_conic=status_conic,
         max_tipo=max_tipo,
         max_setor=max_setor,
+        busca=busca,
+        filtro_status=filtro_status,
+        filtro_setor=filtro_setor,
+        filtro_colaborador=filtro_colaborador,
+        apenas_ativos=apenas_ativos,
+        pagina=pagina,
+        por_pagina=por_pagina,
+        total_itens=total_itens,
+        total_paginas=total_paginas,
+        offset=offset,
     )
 
 

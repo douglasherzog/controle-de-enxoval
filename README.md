@@ -1,5 +1,7 @@
 # Controle de Enxoval
 
+![Testes](https://github.com/douglasherzog/controle-de-enxoval/actions/workflows/ci.yml/badge.svg)
+
 Projeto inicial em Flask + Postgres para cadastro de enxoval e rastreabilidade.
 
 ## Documentação simples
