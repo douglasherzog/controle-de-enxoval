@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Editar {{ tipo.nome }} - Controle de Enxoval{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h1>Editar Tipo de Peça</h1>
+
+    <form method="post" class="span-full">
+      <label for="nome">Nome do Tipo</label>
+      <input id="nome" name="nome" value="{{ tipo.nome }}" required>
+
+      <div class="actions">
+        <a href="{{ url_for('main.index') }}" class="back-link">← Cancelar</a>
+        <button type="submit">Salvar Alterações</button>
+      </div>
+    </form>
+  </div>
+{% endblock %}

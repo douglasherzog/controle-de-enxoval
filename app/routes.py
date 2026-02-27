@@ -377,8 +377,101 @@ def item_detalhe(item_id: int):
     return render_template("item.html", item=item, movimentacoes=movimentacoes)
 
 
+@main_bp.route("/item/<int:item_id>/editar", methods=["GET", "POST"])
+def editar_item(item_id: int):
+    """Edita uma peça existente."""
+    item = db.session.get(EnxovalItem, item_id)
+    if not item:
+        return redirect(url_for("main.index"))
+
+    if request.method == "POST":
+        item.nome = (request.form.get("nome") or item.nome).strip()
+        item.codigo = (request.form.get("codigo") or item.codigo).strip().upper()
+        item.tamanho = (request.form.get("tamanho") or item.tamanho).strip().upper()
+        item.tamanho_customizado = (request.form.get("tamanho_customizado") or "").strip() or None
+        item.tag_rfid = (request.form.get("tag_rfid") or "").strip().upper() or None
+        item.descricao = (request.form.get("descricao") or "").strip() or None
+        item.colaborador = (request.form.get("colaborador") or "").strip() or None
+        item.setor = (request.form.get("setor") or "").strip() or None
+
+        db.session.add(item)
+        db.session.commit()
+        return redirect(url_for("main.index"))
+
+    # GET - mostrar formulário de edição
+    setores_ativos = Setor.query.filter_by(ativo=True).order_by(Setor.nome.asc()).all()
+    colaboradores_ativos = (
+        Colaborador.query.filter_by(ativo=True).order_by(Colaborador.nome.asc()).all()
+    )
+    tipos_peca_ativos = (
+        TipoPeca.query.filter_by(ativo=True).order_by(TipoPeca.nome.asc()).all()
+    )
+
+    return render_template(
+        "editar_item.html",
+        item=item,
+        setores_ativos=setores_ativos,
+        colaboradores_ativos=colaboradores_ativos,
+        tipos_peca_ativos=tipos_peca_ativos,
+        tamanhos=["P", "M", "G", "GG", "SOB MEDIDA"],
+    )
+
+
+@main_bp.route("/colaboradores/<int:colaborador_id>/editar", methods=["GET", "POST"])
+def editar_colaborador(colaborador_id: int):
+    """Edita um colaborador existente."""
+    colaborador = db.session.get(Colaborador, colaborador_id)
+    if not colaborador:
+        return redirect(url_for("main.index"))
+
+    if request.method == "POST":
+        colaborador.nome = (request.form.get("nome") or colaborador.nome).strip()
+        colaborador.telefone = (request.form.get("telefone") or "").strip() or None
+
+        db.session.add(colaborador)
+        db.session.commit()
+        return redirect(url_for("main.index"))
+
+    return render_template("editar_colaborador.html", colaborador=colaborador)
+
+
+@main_bp.route("/setores/<int:setor_id>/editar", methods=["GET", "POST"])
+def editar_setor(setor_id: int):
+    """Edita um setor existente."""
+    setor = db.session.get(Setor, setor_id)
+    if not setor:
+        return redirect(url_for("main.index"))
+
+    if request.method == "POST":
+        setor.nome = (request.form.get("nome") or setor.nome).strip()
+
+        db.session.add(setor)
+        db.session.commit()
+        return redirect(url_for("main.index"))
+
+    return render_template("editar_setor.html", setor=setor)
+
+
+@main_bp.route("/tipos-peca/<int:tipo_id>/editar", methods=["GET", "POST"])
+def editar_tipo_peca(tipo_id: int):
+    """Edita um tipo de peça existente."""
+    tipo = db.session.get(TipoPeca, tipo_id)
+    if not tipo:
+        return redirect(url_for("main.index"))
+
+    if request.method == "POST":
+        tipo.nome = (request.form.get("nome") or tipo.nome).strip()
+
+        db.session.add(tipo)
+        db.session.commit()
+        return redirect(url_for("main.index"))
+
+    return render_template("editar_tipo_peca.html", tipo=tipo)
+
+
 @main_bp.route("/importar", methods=["POST"])
 def importar_csv():
+    """Importa dados de CSV."""
     arquivo = request.files.get("arquivo")
     if not arquivo or not arquivo.filename:
         return redirect(url_for("main.index"))

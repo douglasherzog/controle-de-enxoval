@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}Editar {{ item.codigo }} - Controle de Enxoval{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h1>Editar Peça</h1>
+    <p class="muted">Código: {{ item.codigo }}</p>
+
+    <form method="post" class="span-full">
+      <label for="nome">Tipo</label>
+      <select id="nome" name="nome" required>
+        <option value="">— Selecione —</option>
+        {% for tipo in tipos_peca_ativos %}
+          <option value="{{ tipo.nome }}" {% if tipo.nome == item.nome %}selected{% endif %}>
+            {{ tipo.nome }}
+          </option>
+        {% endfor %}
+      </select>
+
+      <label for="codigo">Código/Rastreio</label>
+      <input id="codigo" name="codigo" value="{{ item.codigo }}" required>
+
+      <label for="tag_rfid">Tag RFID (opcional)</label>
+      <input id="tag_rfid" name="tag_rfid" value="{{ item.tag_rfid or '' }}" placeholder="Ex.: RFID-0001">
+
+      <label for="tamanho">Tamanho</label>
+      <select id="tamanho" name="tamanho" required>
+        <option value="">Selecione</option>
+        {% for tamanho in tamanhos %}
+          <option value="{{ tamanho }}" {% if tamanho == item.tamanho %}selected{% endif %}>
+            {{ tamanho }}
+          </option>
+        {% endfor %}
+      </select>
+
+      <label for="tamanho_customizado">Detalhe sob medida (opcional)</label>
+      <input id="tamanho_customizado" name="tamanho_customizado" value="{{ item.tamanho_customizado or '' }}" placeholder="Ex.: ajuste de manga">
+
+      <label for="colaborador">Colaborador (opcional)</label>
+      <select id="colaborador" name="colaborador">
+        <option value="">— Nenhum —</option>
+        {% for colaborador in colaboradores_ativos %}
+          <option value="{{ colaborador.nome }}" {% if colaborador.nome == item.colaborador %}selected{% endif %}>
+            {{ colaborador.nome }}
+          </option>
+        {% endfor %}
+      </select>
+
+      <label for="setor">Setor (opcional)</label>
+      <select id="setor" name="setor">
+        <option value="">— Nenhum —</option>
+        {% for setor in setores_ativos %}
+          <option value="{{ setor.nome }}" {% if setor.nome == item.setor %}selected{% endif %}>
+            {{ setor.nome }}
+          </option>
+        {% endfor %}
+      </select>
+
+      <label for="descricao">Descrição</label>
+      <textarea id="descricao" name="descricao" placeholder="Detalhes adicionais...">{{ item.descricao or '' }}</textarea>
+
+      <div class="actions">
+        <a href="{{ url_for('main.index') }}" class="back-link">← Cancelar</a>
+        <button type="submit">Salvar Alterações</button>
+      </div>
+    </form>
+  </div>
+{% endblock %}

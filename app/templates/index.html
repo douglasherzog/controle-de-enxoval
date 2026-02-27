@@ -204,6 +204,91 @@
     </section>
 
     <section class="card span-full">
+      <h3>Gerenciar Cadastros</h3>
+      <p class="helper">Edite ou inative colaboradores, setores e tipos de peça.</p>
+      
+      <h4>Colaboradores</h4>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Telefone</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for colaborador in colaboradores_ativos %}
+              <tr>
+                <td>{{ colaborador.nome }}</td>
+                <td>{{ colaborador.telefone or '-' }}</td>
+                <td>
+                  <a href="{{ url_for('main.editar_colaborador', colaborador_id=colaborador.id) }}" class="back-link">✏️ Editar</a>
+                </td>
+              </tr>
+            {% else %}
+              <tr>
+                <td colspan="3" class="muted">Nenhum colaborador cadastrado.</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <h4>Setores</h4>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for setor in setores_ativos %}
+              <tr>
+                <td>{{ setor.nome }}</td>
+                <td>
+                  <a href="{{ url_for('main.editar_setor', setor_id=setor.id) }}" class="back-link">✏️ Editar</a>
+                </td>
+              </tr>
+            {% else %}
+              <tr>
+                <td colspan="2" class="muted">Nenhum setor cadastrado.</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <h4>Tipos de Peça</h4>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for tipo in tipos_peca_ativos %}
+              <tr>
+                <td>{{ tipo.nome }}</td>
+                <td>
+                  <a href="{{ url_for('main.editar_tipo_peca', tipo_id=tipo.id) }}" class="back-link">✏️ Editar</a>
+                </td>
+              </tr>
+            {% else %}
+              <tr>
+                <td colspan="2" class="muted">Nenhum tipo cadastrado.</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card span-full">
       <h3>Importar enxoval (CSV)</h3>
       <p class="helper">Use quando tiver muitas peças para cadastrar de uma vez.</p>
       <form method="post" action="{{ url_for('main.importar_csv') }}" enctype="multipart/form-data">
@@ -357,7 +442,8 @@
                   <span class="muted">{{ item.tamanho }}{% if item.colaborador %} · {{ item.colaborador }}{% endif %}{% if item.setor %} · {{ item.setor }}{% endif %}</span>
                   <div>
                     <a class="back-link" href="{{ url_for('main.item_detalhe', item_id=item.id) }}">Ver histórico</a> |
-                    <a class="back-link" href="{{ url_for('main.etiqueta_item', item_id=item.id) }}" target="_blank">🖨️ Etiqueta</a>
+                    <a class="back-link" href="{{ url_for('main.etiqueta_item', item_id=item.id) }}" target="_blank">🖨️ Etiqueta</a> |
+                    <a class="back-link" href="{{ url_for('main.editar_item', item_id=item.id) }}">✏️ Editar</a>
                   </div>
                 </td>
                 <td>

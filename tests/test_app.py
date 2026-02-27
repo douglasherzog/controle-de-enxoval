@@ -1,6 +1,6 @@
 import io
 import unittest
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 
 from app import create_app
 from app.models import EnxovalItem, Movimentacao, db
@@ -65,7 +65,7 @@ class EnxovalAppTestCase(unittest.TestCase):
             self.assertIsNotNone(item)
 
     def test_alertas_por_dias(self) -> None:
-        agora = datetime.now(timezone.utc)
+        agora = datetime.now(UTC)
         with self.app.app_context():
             item_atencao = EnxovalItem(
                 nome="Bata",
