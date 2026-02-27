@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="grid">
+    <form method="post">
+      <label for="nome">Nome da peça</label>
+      <input id="nome" name="nome" placeholder="Ex.: Jaleco térmico" required>
+
+      <label for="codigo">Código/Rastreio</label>
+      <input id="codigo" name="codigo" placeholder="Ex.: JAL-0001" required>
+
+      <label for="descricao">Descrição</label>
+      <textarea id="descricao" name="descricao" placeholder="Detalhes, tamanho, setor..."></textarea>
+
+      <button type="submit">Cadastrar</button>
+    </form>
+
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Peça</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in itens %}
+            <tr>
+              <td>{{ item.codigo }}</td>
+              <td>{{ item.nome }}</td>
+              <td>
+                {% if item.ativo %}
+                  <span class="badge">Ativo</span>
+                {% else %}
+                  <span class="badge muted">Inativo</span>
+                {% endif %}
+              </td>
+              <td>
+                {% if item.ativo %}
+                  <form method="post" action="{{ url_for('main.inativar_item', item_id=item.id) }}">
+                    <button type="submit">Inativar</button>
+                  </form>
+                {% else %}
+                  <span class="muted">—</span>
+                {% endif %}
+              </td>
+            </tr>
+          {% else %}
+            <tr>
+              <td colspan="4" class="muted">Nenhum item cadastrado ainda.</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}
