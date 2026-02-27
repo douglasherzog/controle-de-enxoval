@@ -211,17 +211,14 @@ def index():
         .scalar()
         or 0
     )
-    # Query para contar peças por tipo (baseado nos tipos padronizados)
-    contagem_por_tipo = dict(
+    # Query para contar peças por tipo (todos os tipos existentes nas peças)
+    por_tipo = (
         db.session.query(EnxovalItem.nome, func.count(EnxovalItem.id))
         .filter(EnxovalItem.ativo.is_(True))
         .group_by(EnxovalItem.nome)
+        .order_by(EnxovalItem.nome.asc())
         .all()
     )
-    # Lista de todos os tipos padronizados ativos com suas contagens
-    tipos_peca_ativos_lista = TipoPeca.query.filter_by(ativo=True).order_by(TipoPeca.nome.asc()).all()
-    por_tipo = [(tipo.nome, contagem_por_tipo.get(tipo.nome, 0)) for tipo in tipos_peca_ativos_lista]
-    
     por_setor = (
         db.session.query(EnxovalItem.setor, func.count(EnxovalItem.id))
         .filter(EnxovalItem.ativo.is_(True))
