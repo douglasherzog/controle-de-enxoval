@@ -13,7 +13,7 @@ from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer, Table
 from sqlalchemy import func, or_
 
-from .models import Colaborador, EnxovalItem, Movimentacao, Setor, TipoPeca, db
+from .models import Colaborador, EnxovalItem, Movimentacao, Setor, Tamanho, TipoPeca, db
 
 STATUS_OPTIONS = [
     "estoque",
@@ -147,6 +147,24 @@ def index():
                 db.session.add(novo_setor)
                 db.session.commit()
                 setor = novo_setor.nome
+
+        # Handle new tamanho creation
+        novo_tamanho_nome = (request.form.get("novo_tamanho_nome") or "").strip()
+        if tamanho == "__novo__" and novo_tamanho_nome:
+            existente = Tamanho.query.filter(
+                func.lower(Tamanho.nome) == novo_tamanho_nome.lower()
+            ).one_or_none()
+            if existente:
+                if not existente.ativo:
+                    existente.ativo = True
+                    db.session.add(existente)
+                    db.session.commit()
+                tamanho = existente.nome
+            else:
+                novo_tamanho = Tamanho(nome=novo_tamanho_nome.upper())
+                db.session.add(novo_tamanho)
+                db.session.commit()
+                tamanho = novo_tamanho.nome
 
         if nome and codigo and tamanho:
             _criar_item(
@@ -324,10 +342,11 @@ def index():
     tipos_peca_ativos = TipoPeca.query.filter_by(
         ativo=True
     ).order_by(TipoPeca.nome.asc()).all()
-    colaboradores_ativos = Colaborador.query.filter_by(
-        ativo=True
-    ).order_by(Colaborador.nome.asc()).all()
+    colaboradores_ativos = (
+        Colaborador.query.filter_by(ativo=True).order_by(Colaborador.nome.asc()).all()
+    )
     setores_ativos = Setor.query.filter_by(ativo=True).order_by(Setor.nome.asc()).all()
+    tamanhos_ativos = Tamanho.query.filter_by(ativo=True).order_by(Tamanho.nome.asc()).all()
     setores = Setor.query.order_by(Setor.nome.asc()).all()
     return render_template(
         "index.html",
@@ -350,6 +369,7 @@ def index():
         colaboradores_ativos=colaboradores_ativos,
         setores=setores,
         setores_ativos=setores_ativos,
+        tamanhos_ativos=tamanhos_ativos,
         busca=busca,
         filtro_status=filtro_status,
         filtro_setor=filtro_setor,
@@ -406,6 +426,7 @@ def editar_item(item_id: int):
     tipos_peca_ativos = (
         TipoPeca.query.filter_by(ativo=True).order_by(TipoPeca.nome.asc()).all()
     )
+    tamanhos_ativos = Tamanho.query.filter_by(ativo=True).order_by(Tamanho.nome.asc()).all()
 
     return render_template(
         "editar_item.html",
@@ -413,7 +434,7 @@ def editar_item(item_id: int):
         setores_ativos=setores_ativos,
         colaboradores_ativos=colaboradores_ativos,
         tipos_peca_ativos=tipos_peca_ativos,
-        tamanhos=["P", "M", "G", "GG", "SOB MEDIDA"],
+        tamanhos_ativos=tamanhos_ativos,
     )
 
 
@@ -987,3 +1008,91 @@ def relatorio_excel(periodo: str):
         as_download=True,
         download_name=f"relatorio_{periodo}_{agora.strftime('%Y%m%d')}.xlsx",
     )
+
+
+@main_bp.route("/tamanhos", methods=["POST"])
+def criar_tamanho():
+    """Cria um novo tamanho."""
+    nome = (request.form.get("nome") or "").strip().upper()
+    if not nome:
+        return redirect(url_for("main.index"))
+
+    existente = (
+        Tamanho.query.filter(func.lower(Tamanho.nome) == nome.lower()).one_or_none()
+    )
+    if existente:
+        if not existente.ativo:
+            existente.ativo = True
+            db.session.add(existente)
+            db.session.commit()
+        return redirect(url_for("main.index"))
+
+    tamanho = Tamanho(nome=nome)
+    db.session.add(tamanho)
+    db.session.commit()
+    return redirect(url_for("main.index"))
+
+
+@main_bp.route("/tamanhos/<int:tamanho_id>/editar", methods=["GET", "POST"])
+def editar_tamanho(tamanho_id: int):
+    """Edita um tamanho existente."""
+    tamanho = db.session.get(Tamanho, tamanho_id)
+    if not tamanho:
+        return redirect(url_for("main.index"))
+
+    if request.method == "POST":
+        tamanho.nome = (request.form.get("nome") or tamanho.nome).strip().upper()
+        db.session.add(tamanho)
+        db.session.commit()
+        return redirect(url_for("main.index"))
+
+    return render_template("editar_tamanho.html", tamanho=tamanho)
+
+
+@main_bp.route("/tamanhos/<int:tamanho_id>/inativar", methods=["POST"])
+def inativar_tamanho(tamanho_id: int):
+    """Inativa um tamanho."""
+    tamanho = db.session.get(Tamanho, tamanho_id)
+    if tamanho:
+        tamanho.ativo = False
+        db.session.add(tamanho)
+        db.session.commit()
+    return redirect(url_for("main.index"))
+
+
+@main_bp.route("/item/<int:item_id>/excluir", methods=["POST"])
+def excluir_item(item_id: int):
+    """Exclui permanentemente uma peça e suas movimentações."""
+    item = db.session.get(EnxovalItem, item_id)
+    if item:
+        # Excluir movimentações primeiro
+        Movimentacao.query.filter_by(item_id=item_id).delete()
+        # Excluir item
+        db.session.delete(item)
+        db.session.commit()
+    return redirect(url_for("main.index"))
+
+
+@main_bp.route("/colaboradores/<int:colaborador_id>/excluir", methods=["POST"])
+def excluir_colaborador(colaborador_id: int):
+    """Exclui permanentemente um colaborador."""
+    colaborador = db.session.get(Colaborador, colaborador_id)
+    if colaborador:
+        db.session.delete(colaborador)
+        db.session.commit()
+    return redirect(url_for("main.index"))
+
+
+def seed_tamanhos():
+    """Pré-cadastra os tamanhos padrão."""
+    tamanhos_padrao = ["P", "M", "G", "GG", "SOB MEDIDA"]
+
+    for nome in tamanhos_padrao:
+        existente = Tamanho.query.filter(
+            func.lower(Tamanho.nome) == nome.lower()
+        ).one_or_none()
+        if not existente:
+            novo = Tamanho(nome=nome, ativo=True)
+            db.session.add(novo)
+
+    db.session.commit()

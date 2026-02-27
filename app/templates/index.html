@@ -223,7 +223,10 @@
                 <td>{{ colaborador.nome }}</td>
                 <td>{{ colaborador.telefone or '-' }}</td>
                 <td>
-                  <a href="{{ url_for('main.editar_colaborador', colaborador_id=colaborador.id) }}" class="back-link">✏️ Editar</a>
+                  <a href="{{ url_for('main.editar_colaborador', colaborador_id=colaborador.id) }}" class="back-link">✏️ Editar</a> |
+                  <form method="post" action="{{ url_for('main.excluir_colaborador', colaborador_id=colaborador.id) }}" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja excluir este colaborador?');">
+                    <button type="submit" class="back-link" style="background:none;border:none;color:#e74c3c;cursor:pointer;">🗑️ Excluir</button>
+                  </form>
                 </td>
               </tr>
             {% else %}
@@ -249,7 +252,10 @@
               <tr>
                 <td>{{ setor.nome }}</td>
                 <td>
-                  <a href="{{ url_for('main.editar_setor', setor_id=setor.id) }}" class="back-link">✏️ Editar</a>
+                  <a href="{{ url_for('main.editar_setor', setor_id=setor.id) }}" class="back-link">✏️ Editar</a> |
+                  <form method="post" action="{{ url_for('main.inativar_setor', setor_id=setor.id) }}" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja inativar este setor?');">
+                    <button type="submit" class="back-link" style="background:none;border:none;color:#e74c3c;cursor:pointer;">🗑️ Inativar</button>
+                  </form>
                 </td>
               </tr>
             {% else %}
@@ -275,7 +281,10 @@
               <tr>
                 <td>{{ tipo.nome }}</td>
                 <td>
-                  <a href="{{ url_for('main.editar_tipo_peca', tipo_id=tipo.id) }}" class="back-link">✏️ Editar</a>
+                  <a href="{{ url_for('main.editar_tipo_peca', tipo_id=tipo.id) }}" class="back-link">✏️ Editar</a> |
+                  <form method="post" action="{{ url_for('main.inativar_tipo_peca', tipo_id=tipo.id) }}" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja inativar este tipo?');">
+                    <button type="submit" class="back-link" style="background:none;border:none;color:#e74c3c;cursor:pointer;">🗑️ Inativar</button>
+                  </form>
                 </td>
               </tr>
             {% else %}
@@ -286,6 +295,42 @@
           </tbody>
         </table>
       </div>
+
+      <h4>Tamanhos</h4>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for tamanho in tamanhos_ativos %}
+              <tr>
+                <td>{{ tamanho.nome }}</td>
+                <td>
+                  <a href="{{ url_for('main.editar_tamanho', tamanho_id=tamanho.id) }}" class="back-link">✏️ Editar</a> |
+                  <form method="post" action="{{ url_for('main.inativar_tamanho', tamanho_id=tamanho.id) }}" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja inativar este tamanho?');">
+                    <button type="submit" class="back-link" style="background:none;border:none;color:#e74c3c;cursor:pointer;">🗑️ Inativar</button>
+                  </form>
+                </td>
+              </tr>
+            {% else %}
+              <tr>
+                <td colspan="2" class="muted">Nenhum tamanho cadastrado.</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <h4>Cadastrar Novo Tamanho</h4>
+      <form method="post" action="{{ url_for('main.criar_tamanho') }}" class="span-full">
+        <label for="nome_tamanho">Nome do Tamanho</label>
+        <input id="nome_tamanho" name="nome" placeholder="Ex.: XG, PP, 42, etc." required>
+        <button type="submit">Cadastrar Tamanho</button>
+      </form>
     </section>
 
     <section class="card span-full">
@@ -324,12 +369,16 @@
       <label for="tamanho">Tamanho</label>
       <select id="tamanho" name="tamanho" required>
         <option value="">Selecione</option>
-        <option value="P">P</option>
-        <option value="M">M</option>
-        <option value="G">G</option>
-        <option value="GG">GG</option>
-        <option value="SOB MEDIDA">Sob medida</option>
+        <option value="__novo__">+ Cadastrar novo tamanho</option>
+        {% for tamanho in tamanhos_ativos %}
+          <option value="{{ tamanho.nome }}">{{ tamanho.nome }}</option>
+        {% endfor %}
       </select>
+
+      <div id="novo-tamanho-container" style="display:none; margin-top:8px;">
+        <label for="novo_tamanho_nome">Nome do novo tamanho</label>
+        <input id="novo_tamanho_nome" name="novo_tamanho_nome" placeholder="Ex.: XG, PP, 42, etc.">
+      </div>
 
       <label for="tamanho_customizado">Detalhe sob medida (opcional)</label>
       <input id="tamanho_customizado" name="tamanho_customizado" placeholder="Ex.: ajuste de manga, nome do colaborador">
@@ -441,10 +490,18 @@
                   <strong>{{ item.nome }}</strong><br>
                   <span class="muted">{{ item.tamanho }}{% if item.colaborador %} · {{ item.colaborador }}{% endif %}{% if item.setor %} · {{ item.setor }}{% endif %}</span>
                   <div>
+                    <div>
                     <a class="back-link" href="{{ url_for('main.item_detalhe', item_id=item.id) }}">Ver histórico</a> |
                     <a class="back-link" href="{{ url_for('main.etiqueta_item', item_id=item.id) }}" target="_blank">🖨️ Etiqueta</a> |
                     <a class="back-link" href="{{ url_for('main.editar_item', item_id=item.id) }}">✏️ Editar</a>
                   </div>
+                  {% if not item.ativo %}
+                    <div style="margin-top: 5px;">
+                      <form method="post" action="{{ url_for('main.excluir_item', item_id=item.id) }}" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja EXCLUIR PERMANENTEMENTE esta peça? Esta ação não pode ser desfeita.');">
+                        <button type="submit" class="back-link" style="background:none;border:none;color:#e74c3c;cursor:pointer;">🗑️ Excluir Permanentemente</button>
+                      </form>
+                    </div>
+                  {% endif %}
                 </td>
                 <td>
                   <span class="badge">{{ item.status|replace('_', ' ') }}</span>
@@ -531,6 +588,24 @@
           novoSetorContainer.style.display = 'none';
           novoSetorInput.removeAttribute('required');
           novoSetorInput.value = '';
+        }
+      });
+    }
+
+    // Tamanho select handler
+    const tamanhoSelect = document.getElementById('tamanho');
+    const novoTamanhoContainer = document.getElementById('novo-tamanho-container');
+    const novoTamanhoInput = document.getElementById('novo_tamanho_nome');
+    
+    if (tamanhoSelect && novoTamanhoContainer) {
+      tamanhoSelect.addEventListener('change', function() {
+        if (this.value === '__novo__') {
+          novoTamanhoContainer.style.display = 'block';
+          novoTamanhoInput.setAttribute('required', 'required');
+        } else {
+          novoTamanhoContainer.style.display = 'none';
+          novoTamanhoInput.removeAttribute('required');
+          novoTamanhoInput.value = '';
         }
       });
     }

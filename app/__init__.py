@@ -2,7 +2,7 @@ from flask import Flask
 
 from .models import db
 from .rfid import rfid_bp
-from .routes import main_bp, seed_tipos_peca
+from .routes import main_bp, seed_tamanhos, seed_tipos_peca
 
 
 def create_app(config_overrides: dict | None = None) -> Flask:
@@ -22,6 +22,7 @@ def create_app(config_overrides: dict | None = None) -> Flask:
     with app.app_context():
         db.create_all()
         seed_tipos_peca()
+        seed_tamanhos()
 
     app.register_blueprint(main_bp)
     app.register_blueprint(rfid_bp)

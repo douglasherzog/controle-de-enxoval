@@ -27,9 +27,9 @@
       <label for="tamanho">Tamanho</label>
       <select id="tamanho" name="tamanho" required>
         <option value="">Selecione</option>
-        {% for tamanho in tamanhos %}
-          <option value="{{ tamanho }}" {% if tamanho == item.tamanho %}selected{% endif %}>
-            {{ tamanho }}
+        {% for tamanho in tamanhos_ativos %}
+          <option value="{{ tamanho.nome }}" {% if tamanho.nome == item.tamanho %}selected{% endif %}>
+            {{ tamanho.nome }}
           </option>
         {% endfor %}
       </select>
