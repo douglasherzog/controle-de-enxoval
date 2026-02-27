@@ -122,7 +122,7 @@
                 <span>{{ total }}</span>
               </div>
               <div class="bar-track">
-                <div class="bar-fill" data-width="{{ (total / max_tipo) * 100 }}"></div>
+                <div class="bar-fill" data-width="{% if max_tipo > 0 %}{{ (total / max_tipo) * 100 }}{% else %}0{% endif %}"></div>
               </div>
             </div>
           {% endfor %}
@@ -136,7 +136,7 @@
                 <span>{{ total }}</span>
               </div>
               <div class="bar-track">
-                <div class="bar-fill" data-width="{{ (total / max_setor) * 100 }}"></div>
+                <div class="bar-fill" data-width="{% if max_setor > 0 %}{{ (total / max_setor) * 100 }}{% else %}0{% endif %}"></div>
               </div>
             </div>
           {% endfor %}
