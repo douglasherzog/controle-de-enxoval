@@ -177,6 +177,10 @@
 
     <div class="actions">
       <a href="{{ url_for('main.index') }}" class="back-link">← Voltar ao Dashboard</a>
+      <a href="{{ url_for('main.relatorio_pdf', periodo=periodo) }}" class="button" target="_blank">📄 Exportar PDF</a>
+      <a href="{{ url_for('main.relatorio_excel', periodo=periodo) }}" class="button" target="_blank">📊 Exportar Excel</a>
+    </div>
+    <div class="actions" style="margin-top: 10px;">
       <a href="{{ url_for('main.relatorio_status', periodo='diario') }}" class="button">Relatório Diário</a>
       <a href="{{ url_for('main.relatorio_status', periodo='semanal') }}" class="button">Relatório Semanal</a>
       <a href="{{ url_for('main.relatorio_status', periodo='mensal') }}" class="button">Relatório Mensal</a>

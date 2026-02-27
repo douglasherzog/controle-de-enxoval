@@ -1,10 +1,16 @@
 import csv
 import io
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from io import StringIO
 
 import qrcode
 from flask import Blueprint, redirect, render_template, request, send_file, url_for
+from openpyxl import Workbook
+from openpyxl.styles import Font, PatternFill
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer, Table
 from sqlalchemy import func, or_
 
 from .models import Colaborador, EnxovalItem, Movimentacao, Setor, TipoPeca, db
@@ -730,3 +736,161 @@ def etiqueta_item(item_id: int):
         return redirect(url_for("main.index"))
 
     return render_template("etiqueta.html", item=item)
+
+
+@main_bp.route("/relatorio/<periodo>/pdf")
+def relatorio_pdf(periodo: str):
+    """Gera relatório em PDF."""
+    from io import BytesIO
+
+    agora = datetime.now(UTC)
+
+    if periodo == "diario":
+        data_inicio = agora - timedelta(days=1)
+        titulo = "Relatório Diário"
+    elif periodo == "semanal":
+        data_inicio = agora - timedelta(weeks=1)
+        titulo = "Relatório Semanal"
+    elif periodo == "mensal":
+        data_inicio = agora - timedelta(days=30)
+        titulo = "Relatório Mensal"
+    else:
+        return redirect(url_for("main.index"))
+
+    # Estatísticas
+    status_counts = dict(
+        db.session.query(EnxovalItem.status, func.count(EnxovalItem.id))
+        .filter(EnxovalItem.ativo.is_(True))
+        .group_by(EnxovalItem.status)
+        .all()
+    )
+    total_ativos = sum(status_counts.values())
+
+    # Criar PDF
+    buffer = BytesIO()
+    doc = SimpleDocTemplate(buffer, pagesize=A4)
+    elements = []
+    styles = getSampleStyleSheet()
+
+    # Título
+    elements.append(Paragraph(f"<b>{titulo}</b>", styles["Title"]))
+    elements.append(
+        Paragraph(
+            f"Período: {data_inicio.strftime('%d/%m/%Y')} a {agora.strftime('%d/%m/%Y')}",
+            styles["Normal"],
+        )
+    )
+    elements.append(Spacer(1, 20))
+
+    # Tabela de status
+    data = [["Status", "Quantidade", "Percentual"]]
+    for status in STATUS_OPTIONS:
+        count = status_counts.get(status, 0)
+        if count > 0:
+            percent = f"{(count / total_ativos * 100):.1f}%"
+            data.append([status.replace("_", " "), str(count), percent])
+
+    table = Table(data)
+    table.setStyle(
+        [
+            ("BACKGROUND", (0, 0), (-1, 0), colors.grey),
+            ("TEXTCOLOR", (0, 0), (-1, 0), colors.whitesmoke),
+            ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+            ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
+            ("FONTSIZE", (0, 0), (-1, 0), 14),
+            ("BOTTOMPADDING", (0, 0), (-1, 0), 12),
+            ("BACKGROUND", (0, 1), (-1, -1), colors.beige),
+            ("GRID", (0, 0), (-1, -1), 1, colors.black),
+        ]
+    )
+    elements.append(table)
+    elements.append(Spacer(1, 20))
+
+    # Total
+    elements.append(Paragraph(f"<b>Total de peças ativas: {total_ativos}</b>", styles["Normal"]))
+
+    doc.build(elements)
+    buffer.seek(0)
+
+    return send_file(
+        buffer,
+        mimetype="application/pdf",
+        as_download=True,
+        download_name=f"relatorio_{periodo}_{agora.strftime('%Y%m%d')}.pdf",
+    )
+
+
+@main_bp.route("/relatorio/<periodo>/excel")
+def relatorio_excel(periodo: str):
+    """Gera relatório em Excel."""
+    from io import BytesIO
+
+    agora = datetime.now(UTC)
+
+    if periodo == "diario":
+        data_inicio = agora - timedelta(days=1)
+        titulo = "Relatório Diário"
+    elif periodo == "semanal":
+        data_inicio = agora - timedelta(weeks=1)
+        titulo = "Relatório Semanal"
+    elif periodo == "mensal":
+        data_inicio = agora - timedelta(days=30)
+        titulo = "Relatório Mensal"
+    else:
+        return redirect(url_for("main.index"))
+
+    # Criar workbook
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "Relatório"
+
+    # Cabeçalho
+    ws["A1"] = titulo
+    ws["A1"].font = Font(bold=True, size=16)
+    ws["A2"] = f"Período: {data_inicio.strftime('%d/%m/%Y')} a {agora.strftime('%d/%m/%Y')}"
+
+    # Estatísticas
+    status_counts = dict(
+        db.session.query(EnxovalItem.status, func.count(EnxovalItem.id))
+        .filter(EnxovalItem.ativo.is_(True))
+        .group_by(EnxovalItem.status)
+        .all()
+    )
+    total_ativos = sum(status_counts.values())
+
+    ws["A4"] = "Status"
+    ws["B4"] = "Quantidade"
+    ws["C4"] = "Percentual"
+    for cell in [ws["A4"], ws["B4"], ws["C4"]]:
+        cell.font = Font(bold=True)
+        cell.fill = PatternFill(start_color="CCCCCC", end_color="CCCCCC", fill_type="solid")
+
+    row = 5
+    for status in STATUS_OPTIONS:
+        count = status_counts.get(status, 0)
+        if count > 0:
+            ws[f"A{row}"] = status.replace("_", " ")
+            ws[f"B{row}"] = count
+            ws[f"C{row}"] = f"{(count / total_ativos * 100):.1f}%"
+            row += 1
+
+    ws[f"A{row + 1}"] = "Total"
+    ws[f"A{row + 1}"].font = Font(bold=True)
+    ws[f"B{row + 1}"] = total_ativos
+    ws[f"B{row + 1}"].font = Font(bold=True)
+
+    # Ajustar larguras
+    ws.column_dimensions["A"].width = 20
+    ws.column_dimensions["B"].width = 12
+    ws.column_dimensions["C"].width = 12
+
+    buffer = BytesIO()
+    wb.save(buffer)
+    buffer.seek(0)
+
+    return send_file(
+        buffer,
+        mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        as_download=True,
+        download_name=f"relatorio_{periodo}_{agora.strftime('%Y%m%d')}.xlsx",
+    )
