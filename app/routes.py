@@ -3,9 +3,9 @@ from datetime import datetime, timezone
 from io import StringIO
 
 from flask import Blueprint, redirect, render_template, request, url_for
-from sqlalchemy import func
+from sqlalchemy import func, or_
 
-from .models import EnxovalItem, Movimentacao, db
+from .models import Colaborador, EnxovalItem, Movimentacao, Setor, TipoPeca, db
 
 
 STATUS_OPTIONS = [
@@ -79,6 +79,62 @@ def index():
         descricao = (request.form.get("descricao") or "").strip() or None
         colaborador = (request.form.get("colaborador") or "").strip() or None
         setor = (request.form.get("setor") or "").strip() or None
+        novo_setor_nome = (request.form.get("novo_setor_nome") or "").strip()
+        novo_tipo_nome = (request.form.get("novo_tipo_nome") or "").strip()
+        novo_colaborador_nome = (request.form.get("novo_colaborador_nome") or "").strip()
+
+        # Handle new tipo peca creation
+        if nome == "__novo__" and novo_tipo_nome:
+            existente = (
+                TipoPeca.query.filter(func.lower(TipoPeca.nome) == novo_tipo_nome.lower()).one_or_none()
+            )
+            if existente:
+                if not existente.ativo:
+                    existente.ativo = True
+                    db.session.add(existente)
+                    db.session.commit()
+                nome = existente.nome
+            else:
+                novo_tipo = TipoPeca(nome=novo_tipo_nome)
+                db.session.add(novo_tipo)
+                db.session.commit()
+                nome = novo_tipo.nome
+
+        # Handle new colaborador creation
+        if colaborador == "__novo__" and novo_colaborador_nome:
+            novo_colaborador_telefone = (request.form.get("novo_colaborador_telefone") or "").strip() or None
+            existente = (
+                Colaborador.query.filter(func.lower(Colaborador.nome) == novo_colaborador_nome.lower()).one_or_none()
+            )
+            if existente:
+                if not existente.ativo:
+                    existente.ativo = True
+                    existente.telefone = novo_colaborador_telefone or existente.telefone
+                    db.session.add(existente)
+                    db.session.commit()
+                colaborador = existente.nome
+            else:
+                novo_colaborador = Colaborador(nome=novo_colaborador_nome, telefone=novo_colaborador_telefone)
+                db.session.add(novo_colaborador)
+                db.session.commit()
+                colaborador = novo_colaborador.nome
+
+        # Handle new sector creation
+        if setor == "__novo__" and novo_setor_nome:
+            existente = (
+                Setor.query.filter(func.lower(Setor.nome) == novo_setor_nome.lower()).one_or_none()
+            )
+            if existente:
+                if not existente.ativo:
+                    existente.ativo = True
+                    db.session.add(existente)
+                    db.session.commit()
+                setor = existente.nome
+            else:
+                novo_setor = Setor(nome=novo_setor_nome)
+                db.session.add(novo_setor)
+                db.session.commit()
+                setor = novo_setor.nome
 
         if nome and codigo and tamanho:
             _criar_item(
@@ -95,7 +151,6 @@ def index():
             )
             db.session.commit()
         return redirect(url_for("main.index"))
-
 
     busca = (request.args.get("busca") or "").strip()
     filtro_status = (request.args.get("status") or "").strip()
@@ -122,7 +177,10 @@ def index():
     if filtro_status:
         itens_query = itens_query.filter(EnxovalItem.status == filtro_status)
     if filtro_setor:
-        itens_query = itens_query.filter(EnxovalItem.setor.ilike(f"%{filtro_setor}%"))
+        if filtro_setor == "__sem__":
+            itens_query = itens_query.filter(or_(EnxovalItem.setor.is_(None), EnxovalItem.setor == ""))
+        else:
+            itens_query = itens_query.filter(EnxovalItem.setor == filtro_setor)
     if filtro_colaborador:
         itens_query = itens_query.filter(
             EnxovalItem.colaborador.ilike(f"%{filtro_colaborador}%")
@@ -246,6 +304,10 @@ def index():
     )
     max_tipo = max((total for _, total in por_tipo), default=1)
     max_setor = max((total for _, total in por_setor), default=1)
+    tipos_peca_ativos = TipoPeca.query.filter_by(ativo=True).order_by(TipoPeca.nome.asc()).all()
+    colaboradores_ativos = Colaborador.query.filter_by(ativo=True).order_by(Colaborador.nome.asc()).all()
+    setores_ativos = Setor.query.filter_by(ativo=True).order_by(Setor.nome.asc()).all()
+    setores = Setor.query.order_by(Setor.nome.asc()).all()
     return render_template(
         "index.html",
         itens=itens,
@@ -263,6 +325,10 @@ def index():
         status_conic=status_conic,
         max_tipo=max_tipo,
         max_setor=max_setor,
+        tipos_peca_ativos=tipos_peca_ativos,
+        colaboradores_ativos=colaboradores_ativos,
+        setores=setores,
+        setores_ativos=setores_ativos,
         busca=busca,
         filtro_status=filtro_status,
         filtro_setor=filtro_setor,
@@ -370,3 +436,130 @@ def movimentar_item(item_id: int):
         db.session.commit()
 
     return redirect(url_for("main.index"))
+
+
+@main_bp.route("/setores", methods=["POST"])
+def criar_setor():
+    nome = (request.form.get("nome") or "").strip()
+    if not nome:
+        return redirect(url_for("main.index"))
+
+    existente = (
+        Setor.query.filter(func.lower(Setor.nome) == nome.lower()).one_or_none()
+    )
+    if existente:
+        if not existente.ativo:
+            existente.ativo = True
+            db.session.add(existente)
+            db.session.commit()
+        return redirect(url_for("main.index"))
+
+    setor = Setor(nome=nome)
+    db.session.add(setor)
+    db.session.commit()
+    return redirect(url_for("main.index"))
+
+
+@main_bp.route("/setores/<int:setor_id>/inativar", methods=["POST"])
+def inativar_setor(setor_id: int):
+    setor = db.session.get(Setor, setor_id)
+    if setor:
+        setor.ativo = False
+        db.session.add(setor)
+        db.session.commit()
+    return redirect(url_for("main.index"))
+
+
+@main_bp.route("/tipos-peca", methods=["POST"])
+def criar_tipo_peca():
+    nome = (request.form.get("nome") or "").strip()
+    if not nome:
+        return redirect(url_for("main.index"))
+
+    existente = (
+        TipoPeca.query.filter(func.lower(TipoPeca.nome) == nome.lower()).one_or_none()
+    )
+    if existente:
+        if not existente.ativo:
+            existente.ativo = True
+            db.session.add(existente)
+            db.session.commit()
+        return redirect(url_for("main.index"))
+
+    tipo_peca = TipoPeca(nome=nome)
+    db.session.add(tipo_peca)
+    db.session.commit()
+    return redirect(url_for("main.index"))
+
+
+@main_bp.route("/tipos-peca/<int:tipo_id>/inativar", methods=["POST"])
+def inativar_tipo_peca(tipo_id: int):
+    tipo_peca = db.session.get(TipoPeca, tipo_id)
+    if tipo_peca:
+        tipo_peca.ativo = False
+        db.session.add(tipo_peca)
+        db.session.commit()
+    return redirect(url_for("main.index"))
+
+
+@main_bp.route("/colaboradores", methods=["POST"])
+def criar_colaborador():
+    nome = (request.form.get("nome") or "").strip()
+    if not nome:
+        return redirect(url_for("main.index"))
+
+    existente = (
+        Colaborador.query.filter(func.lower(Colaborador.nome) == nome.lower()).one_or_none()
+    )
+    if existente:
+        if not existente.ativo:
+            existente.ativo = True
+            db.session.add(existente)
+            db.session.commit()
+        return redirect(url_for("main.index"))
+
+    colaborador = Colaborador(nome=nome)
+    db.session.add(colaborador)
+    db.session.commit()
+    return redirect(url_for("main.index"))
+
+
+@main_bp.route("/colaboradores/<int:colaborador_id>/inativar", methods=["POST"])
+def inativar_colaborador(colaborador_id: int):
+    colaborador = db.session.get(Colaborador, colaborador_id)
+    if colaborador:
+        colaborador.ativo = False
+        db.session.add(colaborador)
+        db.session.commit()
+    return redirect(url_for("main.index"))
+
+
+def seed_tipos_peca():
+    """Pré-cadastra os tipos de peças padrão do frigorífico."""
+    tipos_padrao = [
+        "Moletons",
+        "Calças brancas",
+        "Calças NR10",
+        "Calças térmicas",
+        "Camisas NR10",
+        "Camisetas com capuz acoplado",
+        "Capuz",
+        "Capuz térmico",
+        "Jaquetas térmicas",
+        "Batas manga curta branca",
+        "Batas manga longa branca",
+        "Batas manga curta azul",
+        "Batas manga longa cinza",
+        "Calças azuis",
+        "Calças cinzas",
+    ]
+    
+    for tipo_nome in tipos_padrao:
+        existente = TipoPeca.query.filter(
+            func.lower(TipoPeca.nome) == tipo_nome.lower()
+        ).one_or_none()
+        if not existente:
+            novo_tipo = TipoPeca(nome=tipo_nome, ativo=True)
+            db.session.add(novo_tipo)
+    
+    db.session.commit()

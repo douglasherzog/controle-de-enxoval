@@ -1,7 +1,7 @@
 from flask import Flask
 
 from .models import db
-from .routes import main_bp
+from .routes import main_bp, seed_tipos_peca
 
 
 def create_app(config_overrides: dict | None = None) -> Flask:
@@ -20,6 +20,7 @@ def create_app(config_overrides: dict | None = None) -> Flask:
 
     with app.app_context():
         db.create_all()
+        seed_tipos_peca()
 
     app.register_blueprint(main_bp)
     return app

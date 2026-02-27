@@ -45,3 +45,40 @@ class Movimentacao(db.Model):
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
 
     item = db.relationship("EnxovalItem", back_populates="movimentacoes")
+
+
+class Setor(db.Model):
+    __tablename__ = "setores"
+
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(120), unique=True, nullable=False)
+    ativo = db.Column(db.Boolean, default=True, nullable=False)
+    created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
+
+    def __repr__(self) -> str:
+        return f"<Setor {self.nome}>"
+
+
+class TipoPeca(db.Model):
+    __tablename__ = "tipos_peca"
+
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(120), unique=True, nullable=False)
+    ativo = db.Column(db.Boolean, default=True, nullable=False)
+    created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
+
+    def __repr__(self) -> str:
+        return f"<TipoPeca {self.nome}>"
+
+
+class Colaborador(db.Model):
+    __tablename__ = "colaboradores"
+
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(120), unique=True, nullable=False)
+    telefone = db.Column(db.String(20), nullable=True)
+    ativo = db.Column(db.Boolean, default=True, nullable=False)
+    created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
+
+    def __repr__(self) -> str:
+        return f"<Colaborador {self.nome}>"

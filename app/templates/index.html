@@ -207,7 +207,18 @@
       <span class="step">Passo 1</span>
       <p class="helper">Cadastre cada peça com código único. RFID é opcional.</p>
       <label for="nome">Nome da peça</label>
-      <input id="nome" name="nome" placeholder="Ex.: Jaleco térmico" required>
+      <select id="nome" name="nome" required>
+        <option value="">— Selecione —</option>
+        <option value="__novo__">+ Cadastrar novo tipo</option>
+        {% for tipo in tipos_peca_ativos %}
+          <option value="{{ tipo.nome }}">{{ tipo.nome }}</option>
+        {% endfor %}
+      </select>
+
+      <div id="novo-tipo-container" style="display:none; margin-top:8px;">
+        <label for="novo_tipo_nome">Nome do novo tipo</label>
+        <input id="novo_tipo_nome" name="novo_tipo_nome" placeholder="Ex.: Jaleco térmico">
+      </div>
 
       <label for="codigo">Código/Rastreio</label>
       <input id="codigo" name="codigo" placeholder="Ex.: JAL-0001" required>
@@ -229,10 +240,34 @@
       <input id="tamanho_customizado" name="tamanho_customizado" placeholder="Ex.: ajuste de manga, nome do colaborador">
 
       <label for="colaborador">Colaborador (opcional)</label>
-      <input id="colaborador" name="colaborador" placeholder="Ex.: João Silva">
+      <select id="colaborador" name="colaborador">
+        <option value="">— Selecione —</option>
+        <option value="__novo__">+ Cadastrar novo colaborador</option>
+        {% for colaborador in colaboradores_ativos %}
+          <option value="{{ colaborador.nome }}">{{ colaborador.nome }}</option>
+        {% endfor %}
+      </select>
+
+      <div id="novo-colaborador-container" style="display:none; margin-top:8px;">
+        <label for="novo_colaborador_nome">Nome do novo colaborador</label>
+        <input id="novo_colaborador_nome" name="novo_colaborador_nome" placeholder="Ex.: João Silva">
+        <label for="novo_colaborador_telefone">Telefone (opcional)</label>
+        <input id="novo_colaborador_telefone" name="novo_colaborador_telefone" placeholder="Ex.: (51) 99999-9999">
+      </div>
 
       <label for="setor">Setor (opcional)</label>
-      <input id="setor" name="setor" placeholder="Ex.: Desossa">
+      <select id="setor" name="setor">
+        <option value="">— Selecione —</option>
+        <option value="__novo__">+ Cadastrar novo setor</option>
+        {% for setor in setores_ativos %}
+          <option value="{{ setor.nome }}">{{ setor.nome }}</option>
+        {% endfor %}
+      </select>
+
+      <div id="novo-setor-container" style="display:none; margin-top:8px;">
+        <label for="novo_setor_nome">Nome do novo setor</label>
+        <input id="novo_setor_nome" name="novo_setor_nome" placeholder="Ex.: Desossa">
+      </div>
 
       <label for="descricao">Descrição</label>
       <textarea id="descricao" name="descricao" placeholder="Detalhes, tamanho, setor..."></textarea>
@@ -259,11 +294,23 @@
         </div>
         <div>
           <label for="setor-filtro">Setor</label>
-          <input id="setor-filtro" name="setor" value="{{ filtro_setor }}" placeholder="Ex.: Desossa">
+          <select id="setor-filtro" name="setor">
+            <option value="">Todos</option>
+            <option value="__sem__" {% if filtro_setor == "__sem__" %}selected{% endif %}>Sem setor</option>
+            {% for setor in setores_ativos %}
+              <option value="{{ setor.nome }}" {% if setor.nome == filtro_setor %}selected{% endif %}>{{ setor.nome }}</option>
+            {% endfor %}
+          </select>
         </div>
         <div>
           <label for="colaborador-filtro">Colaborador</label>
-          <input id="colaborador-filtro" name="colaborador" value="{{ filtro_colaborador }}" placeholder="Ex.: João Silva">
+          <select id="colaborador-filtro" name="colaborador">
+            <option value="">Todos</option>
+            <option value="__sem__" {% if filtro_colaborador == "__sem__" %}selected{% endif %}>Sem colaborador</option>
+            {% for colaborador in colaboradores_ativos %}
+              <option value="{{ colaborador.nome }}" {% if colaborador.nome == filtro_colaborador %}selected{% endif %}>{{ colaborador.nome }}</option>
+            {% endfor %}
+          </select>
         </div>
         <div>
           <label for="por_pagina">Por página</label>
@@ -320,10 +367,20 @@
                         </select>
 
                         <label for="colaborador-{{ item.id }}">Colaborador</label>
-                        <input id="colaborador-{{ item.id }}" name="colaborador" value="{{ item.colaborador or '' }}">
+                        <select id="colaborador-{{ item.id }}" name="colaborador">
+                          <option value="">— Selecione —</option>
+                          {% for colaborador in colaboradores_ativos %}
+                            <option value="{{ colaborador.nome }}" {% if colaborador.nome == item.colaborador %}selected{% endif %}>{{ colaborador.nome }}</option>
+                          {% endfor %}
+                        </select>
 
                         <label for="setor-{{ item.id }}">Setor</label>
-                        <input id="setor-{{ item.id }}" name="setor" value="{{ item.setor or '' }}">
+                        <select id="setor-{{ item.id }}" name="setor">
+                          <option value="">— Selecione —</option>
+                          {% for setor in setores_ativos %}
+                            <option value="{{ setor.nome }}" {% if setor.nome == item.setor %}selected{% endif %}>{{ setor.nome }}</option>
+                          {% endfor %}
+                        </select>
 
                         <label for="observacao-{{ item.id }}">Observação</label>
                         <input id="observacao-{{ item.id }}" name="observacao" placeholder="Ex.: retirado na rouparia">
@@ -358,4 +415,64 @@
       </div>
     </section>
   </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Setor select handler
+    const setorSelect = document.getElementById('setor');
+    const novoSetorContainer = document.getElementById('novo-setor-container');
+    const novoSetorInput = document.getElementById('novo_setor_nome');
+    
+    if (setorSelect && novoSetorContainer) {
+      setorSelect.addEventListener('change', function() {
+        if (this.value === '__novo__') {
+          novoSetorContainer.style.display = 'block';
+          novoSetorInput.setAttribute('required', 'required');
+        } else {
+          novoSetorContainer.style.display = 'none';
+          novoSetorInput.removeAttribute('required');
+          novoSetorInput.value = '';
+        }
+      });
+    }
+
+    // Tipo peca select handler
+    const tipoSelect = document.getElementById('nome');
+    const novoTipoContainer = document.getElementById('novo-tipo-container');
+    const novoTipoInput = document.getElementById('novo_tipo_nome');
+    
+    if (tipoSelect && novoTipoContainer) {
+      tipoSelect.addEventListener('change', function() {
+        if (this.value === '__novo__') {
+          novoTipoContainer.style.display = 'block';
+          novoTipoInput.setAttribute('required', 'required');
+        } else {
+          novoTipoContainer.style.display = 'none';
+          novoTipoInput.removeAttribute('required');
+          novoTipoInput.value = '';
+        }
+      });
+    }
+
+    // Colaborador select handler
+    const colaboradorSelect = document.getElementById('colaborador');
+    const novoColaboradorContainer = document.getElementById('novo-colaborador-container');
+    const novoColaboradorInput = document.getElementById('novo_colaborador_nome');
+    
+    if (colaboradorSelect && novoColaboradorContainer) {
+      colaboradorSelect.addEventListener('change', function() {
+        if (this.value === '__novo__') {
+          novoColaboradorContainer.style.display = 'block';
+          novoColaboradorInput.setAttribute('required', 'required');
+        } else {
+          novoColaboradorContainer.style.display = 'none';
+          novoColaboradorInput.removeAttribute('required');
+          novoColaboradorInput.value = '';
+        }
+      });
+    }
+  });
+</script>
 {% endblock %}
