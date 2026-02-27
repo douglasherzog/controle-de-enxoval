@@ -1,0 +1,25 @@
+{
+  "tamanhos": {
+    "P": 0.1,
+    "M": 0.35,
+    "G": 0.4,
+    "GG": 0.15
+  },
+  "itens": [
+    {"nome": "Moletom", "prefixo": "MO", "peso": 2},
+    {"nome": "Calça branca", "prefixo": "CB", "peso": 2},
+    {"nome": "Calça NR10", "prefixo": "CN", "peso": 2},
+    {"nome": "Calça térmica", "prefixo": "CT", "peso": 1},
+    {"nome": "Camisa NR10", "prefixo": "CAM", "peso": 1},
+    {"nome": "Camiseta com capuz", "prefixo": "CC", "peso": 2},
+    {"nome": "Capuz", "prefixo": "CP", "peso": 1},
+    {"nome": "Capuz térmico", "prefixo": "CPT", "peso": 1},
+    {"nome": "Jaqueta térmica", "prefixo": "JT", "peso": 1},
+    {"nome": "Bata manga curta branca", "prefixo": "BMCB", "peso": 2},
+    {"nome": "Bata manga longa branca", "prefixo": "BMLB", "peso": 2},
+    {"nome": "Bata manga curta azul", "prefixo": "BMCA", "peso": 2},
+    {"nome": "Bata manga longa cinza", "prefixo": "BMLC", "peso": 2},
+    {"nome": "Calça azul", "prefixo": "CA", "peso": 2},
+    {"nome": "Calça cinza", "prefixo": "CCZ", "peso": 2}
+  ]
+}

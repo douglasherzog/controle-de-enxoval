@@ -1,0 +1,1401 @@
+nome,codigo,tag_rfid,tamanho,tamanho_customizado,descricao,colaborador,setor,status,observacao
+Moletom,MO-0001,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0002,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0003,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0004,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0005,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0006,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0007,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0008,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0009,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0010,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0011,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0012,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0013,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0014,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0015,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0016,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0017,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0018,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0019,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0020,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0021,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0022,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0023,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0024,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0025,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0026,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0027,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0028,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0029,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0030,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0031,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0032,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0033,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0034,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0035,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0036,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0037,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0038,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0039,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0040,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0041,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0042,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0043,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0044,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0045,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0046,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0047,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0048,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0049,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0050,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0051,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0052,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0053,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0054,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0055,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0056,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0057,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0058,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0059,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0060,,P,,,,,estoque,Geracao pratico
+Moletom,MO-0061,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0001,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0002,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0003,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0004,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0005,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0006,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0007,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0008,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0009,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0010,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0011,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0012,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0013,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0014,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0015,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0016,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0017,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0018,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0019,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0020,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0021,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0022,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0023,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0024,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0025,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0026,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0027,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0028,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0029,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0030,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0031,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0032,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0033,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0034,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0035,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0036,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0037,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0038,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0039,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0040,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0041,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0042,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0043,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0044,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0045,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0046,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0047,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0048,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0049,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0050,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0051,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0052,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0053,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0054,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0055,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0056,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0057,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0058,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0059,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0060,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0061,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0062,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0063,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0064,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0065,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0066,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0067,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0068,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0069,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0070,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0071,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0072,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0073,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0074,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0075,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0076,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0077,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0078,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0079,,P,,,,,estoque,Geracao pratico
+Calça branca,CB-0080,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0081,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0082,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0083,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0084,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0085,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0086,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0087,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0088,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0089,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0090,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0091,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0092,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0093,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0094,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0095,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0096,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0097,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0098,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0099,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0100,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0101,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0102,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0103,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0104,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0105,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0106,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0107,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0108,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0109,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0110,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0111,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0112,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0113,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0114,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0115,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0116,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0117,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0118,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0119,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0120,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0121,,M,,,,,estoque,Geracao pratico
+Calça branca,CB-0122,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0001,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0002,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0003,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0004,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0005,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0006,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0007,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0008,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0009,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0010,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0011,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0012,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0013,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0014,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0015,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0016,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0017,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0018,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0019,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0020,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0021,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0022,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0023,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0024,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0025,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0026,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0027,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0028,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0029,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0030,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0031,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0032,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0033,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0034,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0035,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0036,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0037,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0038,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0039,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0040,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0041,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0042,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0043,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0044,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0045,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0046,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0047,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0048,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0049,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0050,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0051,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0052,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0053,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0054,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0055,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0056,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0057,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0058,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0059,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0060,,M,,,,,estoque,Geracao pratico
+Calça NR10,CN-0061,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0001,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0002,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0003,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0004,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0005,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0006,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0007,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0008,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0009,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0010,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0011,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0012,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0013,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0014,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0015,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0016,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0017,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0018,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0019,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0020,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0021,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0022,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0023,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0024,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0025,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0026,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0027,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0028,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0029,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0030,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0031,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0032,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0033,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0034,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0035,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0036,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0037,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0038,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0039,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0040,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0041,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0042,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0043,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0044,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0045,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0046,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0047,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0048,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0049,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0050,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0051,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0052,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0053,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0054,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0055,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0056,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0057,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0058,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0059,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0060,,M,,,,,estoque,Geracao pratico
+Calça térmica,CT-0061,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0001,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0002,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0003,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0004,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0005,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0006,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0007,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0008,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0009,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0010,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0011,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0012,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0013,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0014,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0015,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0016,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0017,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0018,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0019,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0020,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0021,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0022,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0023,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0024,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0025,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0026,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0027,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0028,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0029,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0030,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0031,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0032,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0033,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0034,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0035,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0036,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0037,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0038,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0039,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0040,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0041,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0042,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0043,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0044,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0045,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0046,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0047,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0048,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0049,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0050,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0051,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0052,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0053,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0054,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0055,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0056,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0057,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0058,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0059,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0060,,M,,,,,estoque,Geracao pratico
+Camisa NR10,CAM-0061,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0001,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0002,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0003,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0004,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0005,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0006,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0007,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0008,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0009,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0010,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0011,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0012,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0013,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0014,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0015,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0016,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0017,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0018,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0019,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0020,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0021,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0022,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0023,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0024,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0025,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0026,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0027,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0028,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0029,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0030,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0031,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0032,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0033,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0034,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0035,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0036,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0037,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0038,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0039,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0040,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0041,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0042,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0043,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0044,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0045,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0046,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0047,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0048,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0049,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0050,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0051,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0052,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0053,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0054,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0055,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0056,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0057,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0058,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0059,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0060,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0061,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0062,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0063,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0064,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0065,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0066,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0067,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0068,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0069,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0070,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0071,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0072,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0073,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0074,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0075,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0076,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0077,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0078,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0079,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0080,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0081,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0082,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0083,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0084,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0085,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0086,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0087,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0088,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0089,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0090,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0091,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0092,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0093,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0094,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0095,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0096,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0097,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0098,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0099,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0100,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0101,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0102,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0103,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0104,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0105,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0106,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0107,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0108,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0109,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0110,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0111,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0112,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0113,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0114,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0115,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0116,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0117,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0118,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0119,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0120,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0121,,M,,,,,estoque,Geracao pratico
+Camiseta com capuz,CC-0122,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0001,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0002,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0003,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0004,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0005,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0006,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0007,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0008,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0009,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0010,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0011,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0012,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0013,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0014,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0015,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0016,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0017,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0018,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0019,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0020,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0021,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0022,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0023,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0024,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0025,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0026,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0027,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0028,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0029,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0030,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0031,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0032,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0033,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0034,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0035,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0036,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0037,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0038,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0039,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0040,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0041,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0042,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0043,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0044,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0045,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0046,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0047,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0048,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0049,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0050,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0051,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0052,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0053,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0054,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0055,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0056,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0057,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0058,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0059,,M,,,,,estoque,Geracao pratico
+Capuz,CP-0060,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0001,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0002,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0003,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0004,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0005,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0006,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0007,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0008,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0009,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0010,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0011,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0012,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0013,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0014,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0015,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0016,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0017,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0018,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0019,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0020,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0021,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0022,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0023,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0024,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0025,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0026,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0027,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0028,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0029,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0030,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0031,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0032,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0033,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0034,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0035,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0036,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0037,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0038,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0039,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0040,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0041,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0042,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0043,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0044,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0045,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0046,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0047,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0048,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0049,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0050,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0051,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0052,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0053,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0054,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0055,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0056,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0057,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0058,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0059,,M,,,,,estoque,Geracao pratico
+Capuz térmico,CPT-0060,,M,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0001,,M,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0002,,M,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0003,,M,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0004,,M,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0005,,M,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0006,,M,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0007,,M,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0008,,M,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0009,,M,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0010,,M,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0011,,M,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0012,,M,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0013,,M,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0014,,M,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0015,,M,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0016,,M,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0017,,M,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0018,,M,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0019,,M,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0020,,M,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0021,,M,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0022,,G,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0023,,G,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0024,,G,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0025,,G,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0026,,G,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0027,,G,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0028,,G,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0029,,G,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0030,,G,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0031,,G,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0032,,G,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0033,,G,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0034,,G,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0035,,G,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0036,,G,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0037,,G,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0038,,G,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0039,,G,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0040,,G,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0041,,G,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0042,,G,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0043,,G,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0044,,G,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0045,,G,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0046,,G,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0047,,G,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0048,,G,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0049,,G,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0050,,G,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0051,,G,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0052,,G,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0053,,G,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0054,,G,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0055,,G,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0056,,G,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0057,,G,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0058,,G,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0059,,G,,,,,estoque,Geracao pratico
+Jaqueta térmica,JT-0060,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0001,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0002,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0003,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0004,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0005,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0006,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0007,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0008,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0009,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0010,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0011,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0012,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0013,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0014,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0015,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0016,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0017,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0018,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0019,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0020,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0021,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0022,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0023,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0024,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0025,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0026,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0027,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0028,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0029,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0030,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0031,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0032,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0033,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0034,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0035,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0036,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0037,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0038,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0039,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0040,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0041,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0042,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0043,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0044,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0045,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0046,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0047,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0048,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0049,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0050,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0051,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0052,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0053,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0054,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0055,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0056,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0057,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0058,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0059,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0060,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0061,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0062,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0063,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0064,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0065,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0066,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0067,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0068,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0069,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0070,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0071,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0072,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0073,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0074,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0075,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0076,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0077,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0078,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0079,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0080,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0081,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0082,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0083,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0084,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0085,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0086,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0087,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0088,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0089,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0090,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0091,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0092,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0093,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0094,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0095,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0096,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0097,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0098,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0099,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0100,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0101,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0102,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0103,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0104,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0105,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0106,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0107,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0108,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0109,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0110,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0111,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0112,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0113,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0114,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0115,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0116,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0117,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0118,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0119,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0120,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0121,,G,,,,,estoque,Geracao pratico
+Bata manga curta branca,BMCB-0122,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0001,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0002,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0003,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0004,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0005,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0006,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0007,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0008,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0009,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0010,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0011,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0012,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0013,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0014,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0015,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0016,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0017,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0018,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0019,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0020,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0021,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0022,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0023,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0024,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0025,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0026,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0027,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0028,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0029,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0030,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0031,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0032,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0033,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0034,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0035,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0036,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0037,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0038,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0039,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0040,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0041,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0042,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0043,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0044,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0045,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0046,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0047,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0048,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0049,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0050,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0051,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0052,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0053,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0054,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0055,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0056,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0057,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0058,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0059,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0060,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0061,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0062,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0063,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0064,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0065,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0066,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0067,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0068,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0069,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0070,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0071,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0072,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0073,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0074,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0075,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0076,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0077,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0078,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0079,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0080,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0081,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0082,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0083,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0084,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0085,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0086,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0087,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0088,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0089,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0090,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0091,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0092,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0093,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0094,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0095,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0096,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0097,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0098,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0099,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0100,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0101,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0102,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0103,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0104,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0105,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0106,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0107,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0108,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0109,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0110,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0111,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0112,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0113,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0114,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0115,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0116,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0117,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0118,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0119,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0120,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0121,,G,,,,,estoque,Geracao pratico
+Bata manga longa branca,BMLB-0122,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0001,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0002,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0003,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0004,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0005,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0006,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0007,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0008,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0009,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0010,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0011,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0012,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0013,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0014,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0015,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0016,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0017,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0018,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0019,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0020,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0021,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0022,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0023,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0024,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0025,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0026,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0027,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0028,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0029,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0030,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0031,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0032,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0033,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0034,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0035,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0036,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0037,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0038,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0039,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0040,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0041,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0042,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0043,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0044,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0045,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0046,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0047,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0048,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0049,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0050,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0051,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0052,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0053,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0054,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0055,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0056,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0057,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0058,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0059,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0060,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0061,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0062,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0063,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0064,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0065,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0066,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0067,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0068,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0069,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0070,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0071,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0072,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0073,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0074,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0075,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0076,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0077,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0078,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0079,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0080,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0081,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0082,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0083,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0084,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0085,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0086,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0087,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0088,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0089,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0090,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0091,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0092,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0093,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0094,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0095,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0096,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0097,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0098,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0099,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0100,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0101,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0102,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0103,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0104,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0105,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0106,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0107,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0108,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0109,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0110,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0111,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0112,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0113,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0114,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0115,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0116,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0117,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0118,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0119,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0120,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0121,,G,,,,,estoque,Geracao pratico
+Bata manga curta azul,BMCA-0122,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0001,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0002,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0003,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0004,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0005,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0006,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0007,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0008,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0009,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0010,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0011,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0012,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0013,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0014,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0015,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0016,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0017,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0018,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0019,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0020,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0021,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0022,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0023,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0024,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0025,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0026,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0027,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0028,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0029,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0030,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0031,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0032,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0033,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0034,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0035,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0036,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0037,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0038,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0039,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0040,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0041,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0042,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0043,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0044,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0045,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0046,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0047,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0048,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0049,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0050,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0051,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0052,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0053,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0054,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0055,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0056,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0057,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0058,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0059,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0060,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0061,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0062,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0063,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0064,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0065,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0066,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0067,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0068,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0069,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0070,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0071,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0072,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0073,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0074,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0075,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0076,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0077,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0078,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0079,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0080,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0081,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0082,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0083,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0084,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0085,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0086,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0087,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0088,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0089,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0090,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0091,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0092,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0093,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0094,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0095,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0096,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0097,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0098,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0099,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0100,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0101,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0102,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0103,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0104,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0105,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0106,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0107,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0108,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0109,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0110,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0111,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0112,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0113,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0114,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0115,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0116,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0117,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0118,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0119,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0120,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0121,,G,,,,,estoque,Geracao pratico
+Bata manga longa cinza,BMLC-0122,,G,,,,,estoque,Geracao pratico
+Calça azul,CA-0001,,G,,,,,estoque,Geracao pratico
+Calça azul,CA-0002,,G,,,,,estoque,Geracao pratico
+Calça azul,CA-0003,,G,,,,,estoque,Geracao pratico
+Calça azul,CA-0004,,G,,,,,estoque,Geracao pratico
+Calça azul,CA-0005,,G,,,,,estoque,Geracao pratico
+Calça azul,CA-0006,,G,,,,,estoque,Geracao pratico
+Calça azul,CA-0007,,G,,,,,estoque,Geracao pratico
+Calça azul,CA-0008,,G,,,,,estoque,Geracao pratico
+Calça azul,CA-0009,,G,,,,,estoque,Geracao pratico
+Calça azul,CA-0010,,G,,,,,estoque,Geracao pratico
+Calça azul,CA-0011,,G,,,,,estoque,Geracao pratico
+Calça azul,CA-0012,,G,,,,,estoque,Geracao pratico
+Calça azul,CA-0013,,G,,,,,estoque,Geracao pratico
+Calça azul,CA-0014,,G,,,,,estoque,Geracao pratico
+Calça azul,CA-0015,,G,,,,,estoque,Geracao pratico
+Calça azul,CA-0016,,G,,,,,estoque,Geracao pratico
+Calça azul,CA-0017,,G,,,,,estoque,Geracao pratico
+Calça azul,CA-0018,,G,,,,,estoque,Geracao pratico
+Calça azul,CA-0019,,G,,,,,estoque,Geracao pratico
+Calça azul,CA-0020,,G,,,,,estoque,Geracao pratico
+Calça azul,CA-0021,,G,,,,,estoque,Geracao pratico
+Calça azul,CA-0022,,G,,,,,estoque,Geracao pratico
+Calça azul,CA-0023,,G,,,,,estoque,Geracao pratico
+Calça azul,CA-0024,,G,,,,,estoque,Geracao pratico
+Calça azul,CA-0025,,G,,,,,estoque,Geracao pratico
+Calça azul,CA-0026,,G,,,,,estoque,Geracao pratico
+Calça azul,CA-0027,,G,,,,,estoque,Geracao pratico
+Calça azul,CA-0028,,G,,,,,estoque,Geracao pratico
+Calça azul,CA-0029,,G,,,,,estoque,Geracao pratico
+Calça azul,CA-0030,,G,,,,,estoque,Geracao pratico
+Calça azul,CA-0031,,G,,,,,estoque,Geracao pratico
+Calça azul,CA-0032,,G,,,,,estoque,Geracao pratico
+Calça azul,CA-0033,,G,,,,,estoque,Geracao pratico
+Calça azul,CA-0034,,G,,,,,estoque,Geracao pratico
+Calça azul,CA-0035,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0036,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0037,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0038,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0039,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0040,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0041,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0042,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0043,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0044,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0045,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0046,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0047,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0048,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0049,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0050,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0051,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0052,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0053,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0054,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0055,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0056,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0057,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0058,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0059,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0060,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0061,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0062,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0063,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0064,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0065,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0066,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0067,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0068,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0069,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0070,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0071,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0072,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0073,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0074,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0075,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0076,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0077,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0078,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0079,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0080,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0081,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0082,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0083,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0084,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0085,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0086,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0087,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0088,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0089,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0090,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0091,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0092,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0093,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0094,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0095,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0096,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0097,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0098,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0099,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0100,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0101,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0102,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0103,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0104,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0105,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0106,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0107,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0108,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0109,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0110,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0111,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0112,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0113,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0114,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0115,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0116,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0117,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0118,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0119,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0120,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0121,,GG,,,,,estoque,Geracao pratico
+Calça azul,CA-0122,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0001,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0002,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0003,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0004,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0005,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0006,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0007,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0008,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0009,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0010,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0011,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0012,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0013,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0014,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0015,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0016,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0017,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0018,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0019,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0020,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0021,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0022,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0023,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0024,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0025,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0026,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0027,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0028,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0029,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0030,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0031,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0032,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0033,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0034,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0035,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0036,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0037,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0038,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0039,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0040,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0041,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0042,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0043,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0044,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0045,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0046,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0047,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0048,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0049,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0050,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0051,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0052,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0053,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0054,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0055,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0056,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0057,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0058,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0059,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0060,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0061,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0062,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0063,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0064,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0065,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0066,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0067,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0068,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0069,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0070,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0071,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0072,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0073,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0074,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0075,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0076,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0077,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0078,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0079,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0080,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0081,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0082,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0083,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0084,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0085,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0086,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0087,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0088,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0089,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0090,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0091,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0092,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0093,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0094,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0095,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0096,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0097,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0098,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0099,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0100,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0101,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0102,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0103,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0104,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0105,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0106,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0107,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0108,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0109,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0110,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0111,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0112,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0113,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0114,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0115,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0116,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0117,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0118,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0119,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0120,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0121,,GG,,,,,estoque,Geracao pratico
+Calça cinza,CCZ-0122,,GG,,,,,estoque,Geracao pratico

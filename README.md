@@ -2,6 +2,11 @@
 
 Projeto inicial em Flask + Postgres para cadastro de enxoval e rastreabilidade.
 
+## Documentação simples
+
+- Manual do usuário: `docs/manual.md`
+- Registro do que foi feito: `docs/status.md`
+
 ## Como subir (Docker Compose)
 
 ### Opção rápida (Windows)

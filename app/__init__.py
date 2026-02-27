@@ -4,7 +4,7 @@ from .models import db
 from .routes import main_bp
 
 
-def create_app() -> Flask:
+def create_app(config_overrides: dict | None = None) -> Flask:
     app = Flask(__name__)
     app.config.from_mapping(
         SECRET_KEY="change-me",
@@ -13,6 +13,8 @@ def create_app() -> Flask:
     )
 
     app.config.from_prefixed_env()
+    if config_overrides:
+        app.config.update(config_overrides)
 
     db.init_app(app)
 

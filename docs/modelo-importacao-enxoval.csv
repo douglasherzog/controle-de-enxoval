@@ -1,0 +1,4 @@
+nome,codigo,tag_rfid,tamanho,tamanho_customizado,descricao,colaborador,setor,status,observacao
+Moletom,MO-0001,RFID-0001,P,,Moletom térmico,João Silva,Desossa,entregue,Entrega inicial
+Calça NR10,CN-0020,,G,,Calça NR10,,Corte,estoque,Importacao inicial
+Bata manga longa branca,BL-0100,RFID-0100,GG,ajuste ombro,Bata branca,,Higienizacao,em_lavagem,Lavagem diaria

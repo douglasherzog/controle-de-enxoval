@@ -46,6 +46,61 @@
         grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
         margin-top: 20px;
       }
+      .summary {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 12px;
+        grid-column: 1 / -1;
+      }
+      .summary-card {
+        background: var(--panel);
+        border-radius: 16px;
+        padding: 16px;
+        box-shadow: 0 8px 24px rgba(33, 31, 28, 0.08);
+      }
+      .label {
+        display: block;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+      }
+      .detail-grid {
+        display: grid;
+        gap: 18px;
+      }
+      .card {
+        background: var(--panel);
+        border-radius: 16px;
+        padding: 20px;
+        box-shadow: 0 8px 24px rgba(33, 31, 28, 0.08);
+      }
+      .back-link {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 600;
+      }
+      .meta {
+        display: grid;
+        gap: 6px;
+        margin-top: 12px;
+        color: var(--muted);
+      }
+      .helper {
+        font-size: 13px;
+        color: var(--muted);
+        margin: 6px 0 14px;
+      }
+      .step {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        margin-bottom: 8px;
+      }
       form {
         background: var(--panel);
         border-radius: 16px;

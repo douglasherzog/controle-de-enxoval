@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="detail-grid">
+    <a class="back-link" href="{{ url_for('main.index') }}">← Voltar ao painel</a>
+
+    <section class="card">
+      <h2>{{ item.nome }}</h2>
+      <div class="meta">
+        <span><strong>Código:</strong> {{ item.codigo }}</span>
+        <span><strong>RFID:</strong> {{ item.tag_rfid or '—' }}</span>
+        <span><strong>Tamanho:</strong> {{ item.tamanho }}{% if item.tamanho_customizado %} ({{ item.tamanho_customizado }}){% endif %}</span>
+        <span><strong>Status atual:</strong> {{ item.status|replace('_', ' ') }}</span>
+        <span><strong>Colaborador:</strong> {{ item.colaborador or '—' }}</span>
+        <span><strong>Setor:</strong> {{ item.setor or '—' }}</span>
+        <span><strong>Descrição:</strong> {{ item.descricao or '—' }}</span>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3>Histórico de movimentações</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Status</th>
+            <th>Colaborador</th>
+            <th>Setor</th>
+            <th>Observação</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for mov in movimentacoes %}
+            <tr>
+              <td>{{ mov.created_at.strftime('%d/%m/%Y %H:%M') }}</td>
+              <td>{{ mov.status|replace('_', ' ') }}</td>
+              <td>{{ mov.colaborador or '—' }}</td>
+              <td>{{ mov.setor or '—' }}</td>
+              <td>{{ mov.observacao or '—' }}</td>
+            </tr>
+          {% else %}
+            <tr>
+              <td colspan="5" class="muted">Nenhuma movimentação registrada.</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+  </div>
+{% endblock %}

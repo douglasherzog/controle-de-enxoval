@@ -2,12 +2,117 @@
 
 {% block content %}
   <div class="grid">
+    <section class="summary">
+      <div class="summary-card">
+        <span class="label">Peças ativas</span>
+        <strong>{{ total_ativos }}</strong>
+      </div>
+      <div class="summary-card">
+        <span class="label">Pendentes de retorno</span>
+        <strong>{{ pendentes }}</strong>
+      </div>
+      <div class="summary-card">
+        <span class="label">Extraviadas</span>
+        <strong>{{ extraviados }}</strong>
+      </div>
+      <div class="summary-card">
+        <span class="label">Em estoque</span>
+        <strong>{{ status_counts.get('estoque', 0) }}</strong>
+      </div>
+    </section>
+    <p class="helper">
+      Passo a passo: 1) cadastre as peças, 2) registre cada movimentação, 3) acompanhe pendências e perdas.
+    </p>
+    <section class="card">
+      <h3>Inventário por tipo</h3>
+      <p class="helper">Mostra quantas peças ativas existem por tipo (moletom, calça, bata...).</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Tipo</th>
+            <th>Quantidade</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for tipo, total in por_tipo %}
+            <tr>
+              <td>{{ tipo }}</td>
+              <td>{{ total }}</td>
+            </tr>
+          {% else %}
+            <tr>
+              <td colspan="2" class="muted">Sem dados.</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h3>Inventário por setor</h3>
+      <p class="helper">Ajuda a ver onde o enxoval está concentrado no frigorífico.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Setor</th>
+            <th>Quantidade</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for setor, total in por_setor %}
+            <tr>
+              <td>{{ setor or 'Sem setor' }}</td>
+              <td>{{ total }}</td>
+            </tr>
+          {% else %}
+            <tr>
+              <td colspan="2" class="muted">Sem dados.</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h3>Importar enxoval (CSV)</h3>
+      <p class="helper">Use quando tiver muitas peças para cadastrar de uma vez.</p>
+      <form method="post" action="{{ url_for('main.importar_csv') }}" enctype="multipart/form-data">
+        <label for="arquivo">Arquivo CSV</label>
+        <input id="arquivo" name="arquivo" type="file" accept=".csv" required>
+        <button type="submit">Importar</button>
+      </form>
+    </section>
+
     <form method="post">
+      <span class="step">Passo 1</span>
+      <p class="helper">Cadastre cada peça com código único. RFID é opcional.</p>
       <label for="nome">Nome da peça</label>
       <input id="nome" name="nome" placeholder="Ex.: Jaleco térmico" required>
 
       <label for="codigo">Código/Rastreio</label>
       <input id="codigo" name="codigo" placeholder="Ex.: JAL-0001" required>
+
+      <label for="tag_rfid">Tag RFID (opcional)</label>
+      <input id="tag_rfid" name="tag_rfid" placeholder="Ex.: RFID-0001">
+
+      <label for="tamanho">Tamanho</label>
+      <select id="tamanho" name="tamanho" required>
+        <option value="">Selecione</option>
+        <option value="P">P</option>
+        <option value="M">M</option>
+        <option value="G">G</option>
+        <option value="GG">GG</option>
+        <option value="SOB MEDIDA">Sob medida</option>
+      </select>
+
+      <label for="tamanho_customizado">Detalhe sob medida (opcional)</label>
+      <input id="tamanho_customizado" name="tamanho_customizado" placeholder="Ex.: ajuste de manga, nome do colaborador">
+
+      <label for="colaborador">Colaborador (opcional)</label>
+      <input id="colaborador" name="colaborador" placeholder="Ex.: João Silva">
+
+      <label for="setor">Setor (opcional)</label>
+      <input id="setor" name="setor" placeholder="Ex.: Desossa">
 
       <label for="descricao">Descrição</label>
       <textarea id="descricao" name="descricao" placeholder="Detalhes, tamanho, setor..."></textarea>
@@ -29,18 +134,41 @@
           {% for item in itens %}
             <tr>
               <td>{{ item.codigo }}</td>
-              <td>{{ item.nome }}</td>
               <td>
-                {% if item.ativo %}
-                  <span class="badge">Ativo</span>
-                {% else %}
-                  <span class="badge muted">Inativo</span>
-                {% endif %}
+                <strong>{{ item.nome }}</strong><br>
+                <span class="muted">{{ item.tamanho }}{% if item.colaborador %} · {{ item.colaborador }}{% endif %}{% if item.setor %} · {{ item.setor }}{% endif %}</span>
+                <div>
+                  <a class="back-link" href="{{ url_for('main.item_detalhe', item_id=item.id) }}">Ver histórico</a>
+                </div>
+              </td>
+              <td>
+                <span class="badge">{{ item.status|replace('_', ' ') }}</span>
               </td>
               <td>
                 {% if item.ativo %}
+                  <span class="step">Passo 2</span>
+                  <p class="helper">Atualize o status sempre que a peça mudar de local.</p>
                   <form method="post" action="{{ url_for('main.inativar_item', item_id=item.id) }}">
                     <button type="submit">Inativar</button>
+                  </form>
+                  <form method="post" action="{{ url_for('main.movimentar_item', item_id=item.id) }}">
+                    <label for="status-{{ item.id }}">Status</label>
+                    <select id="status-{{ item.id }}" name="status" required>
+                      {% for status in status_options %}
+                        <option value="{{ status }}" {% if status == item.status %}selected{% endif %}>{{ status|replace('_', ' ') }}</option>
+                      {% endfor %}
+                    </select>
+
+                    <label for="colaborador-{{ item.id }}">Colaborador</label>
+                    <input id="colaborador-{{ item.id }}" name="colaborador" value="{{ item.colaborador or '' }}">
+
+                    <label for="setor-{{ item.id }}">Setor</label>
+                    <input id="setor-{{ item.id }}" name="setor" value="{{ item.setor or '' }}">
+
+                    <label for="observacao-{{ item.id }}">Observação</label>
+                    <input id="observacao-{{ item.id }}" name="observacao" placeholder="Ex.: retirado na rouparia">
+
+                    <button type="submit">Registrar movimentação</button>
                   </form>
                 {% else %}
                   <span class="muted">—</span>
