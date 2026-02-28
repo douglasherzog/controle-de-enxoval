@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Esqueci minha senha - Controle de Enxoval{% endblock %}
+
+{% block content %}
+  <div class="grid">
+    <section class="card span-full">
+      <h3>Esqueci minha senha</h3>
+      <p class="helper">Por segurança, a redefinição é feita por um administrador.</p>
+      <ol class="meta">
+        <li>Peça ao administrador para acessar <strong>Gerenciar → Usuários</strong>.</li>
+        <li>Ele deve definir uma nova senha no campo “Redefinir senha”.</li>
+        <li>Você fará login e será solicitado a trocar a senha novamente.</li>
+      </ol>
+      <div class="actions spaced">
+        <a href="{{ url_for('main.login') }}" class="button">Voltar ao login</a>
+      </div>
+    </section>
+  </div>
+{% endblock %}

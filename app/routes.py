@@ -6,6 +6,7 @@ from io import StringIO
 
 import qrcode
 from flask import Blueprint, jsonify, redirect, render_template, request, send_file, url_for
+from flask_login import current_user, login_required, login_user, logout_user
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill
 from reportlab.lib import colors
@@ -23,6 +24,7 @@ from .models import (
     Setor,
     Tamanho,
     TipoPeca,
+    User,
     db,
 )
 
@@ -72,6 +74,34 @@ def _obter_configuracao() -> Configuracao:
     return config
 
 
+def _exigir_admin() -> bool:
+    return bool(current_user.is_authenticated and current_user.is_admin)
+
+
+def _validar_senha(senha: str) -> str | None:
+    if len(senha) < 8:
+        return "A senha deve ter pelo menos 8 caracteres."
+    if not any(char.isdigit() for char in senha):
+        return "A senha deve conter ao menos um número."
+    return None
+
+
+@main_bp.before_app_request
+def _forcar_troca_senha():
+    if not current_user.is_authenticated:
+        return None
+    if not getattr(current_user, "must_change_password", False):
+        return None
+
+    endpoint = request.endpoint or ""
+    if endpoint.startswith("main.login") or endpoint.startswith("main.logout"):
+        return None
+    if endpoint.startswith("main.alterar_senha") or endpoint.startswith("static"):
+        return None
+
+    return redirect(url_for("main.alterar_senha"))
+
+
 def _criar_item(
     *,
     nome: str,
@@ -108,7 +138,85 @@ def _criar_item(
     )
 
 
+@main_bp.route("/login", methods=["GET", "POST"])
+def login():
+    if current_user.is_authenticated:
+        return redirect(url_for("main.index"))
+
+    erro = None
+    admin_user = User.query.filter_by(username="admin").first()
+    mostrar_hint_admin = bool(admin_user and admin_user.must_change_password)
+    if request.method == "POST":
+        username = (request.form.get("username") or "").strip()
+        senha = (request.form.get("password") or "").strip()
+        usuario = User.query.filter_by(username=username).first()
+        if usuario and usuario.check_password(senha):
+            login_user(usuario)
+            if usuario.must_change_password:
+                return redirect(url_for("main.alterar_senha"))
+            destino = (
+                request.form.get("next")
+                or request.args.get("next")
+                or url_for("main.index")
+            )
+            return redirect(destino)
+        erro = "Usuário ou senha inválidos."
+
+    return render_template(
+        "login.html",
+        erro=erro,
+        mostrar_hint_admin=mostrar_hint_admin,
+    )
+
+
+@main_bp.route("/esqueci-senha")
+def esqueci_senha():
+    return render_template("esqueci_senha.html")
+
+
+@main_bp.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for("main.login"))
+
+
+@main_bp.route("/minha-senha", methods=["GET", "POST"])
+@login_required
+def alterar_senha():
+    erro = None
+    sucesso = None
+    if request.method == "POST":
+        senha_atual = (request.form.get("senha_atual") or "").strip()
+        nova_senha = (request.form.get("nova_senha") or "").strip()
+        confirmar = (request.form.get("confirmar") or "").strip()
+        if not current_user.check_password(senha_atual):
+            erro = "Senha atual incorreta."
+        elif not nova_senha:
+            erro = "Informe a nova senha."
+        elif nova_senha != confirmar:
+            erro = "Confirmação diferente da nova senha."
+        else:
+            erro_validacao = _validar_senha(nova_senha)
+            if erro_validacao:
+                erro = erro_validacao
+            else:
+                current_user.set_password(nova_senha)
+                current_user.must_change_password = False
+                db.session.add(current_user)
+                db.session.commit()
+                sucesso = "Senha atualizada com sucesso."
+
+    return render_template(
+        "alterar_senha.html",
+        erro=erro,
+        sucesso=sucesso,
+        precisa_trocar=current_user.must_change_password,
+    )
+
+
 @main_bp.route("/", methods=["GET", "POST"])
+@login_required
 def index():
     if request.method == "POST":
         nome = (request.form.get("nome") or "").strip()
@@ -453,6 +561,7 @@ def _montar_dashboard_context() -> dict:
 
 
 @main_bp.route("/dashboard")
+@login_required
 def dashboard():
     """Página com gráficos e indicadores do enxoval."""
     contexto = _montar_dashboard_context()
@@ -460,6 +569,7 @@ def dashboard():
 
 
 @main_bp.route("/status")
+@login_required
 def status():
     """Página simples de status do sistema."""
     version = os.getenv("APP_VERSION", "dev")
@@ -482,6 +592,7 @@ def status():
 
 
 @main_bp.route("/revisao", methods=["GET", "POST"])
+@login_required
 def revisao():
     """Tela de revisão rápida do enxoval."""
     config = _obter_configuracao()
@@ -576,6 +687,7 @@ def revisao():
 
 
 @main_bp.route("/revisao/scan", methods=["GET", "POST"])
+@login_required
 def revisao_scan():
     """Leitura por QR Code para revisão rápida."""
     if request.method == "GET":
@@ -631,6 +743,7 @@ def revisao_scan():
 
 
 @main_bp.route("/revisoes/relatorio")
+@login_required
 def relatorio_revisoes():
     """Relatório simples de revisões por período."""
     try:
@@ -666,6 +779,7 @@ def relatorio_revisoes():
 
 
 @main_bp.route("/item/<int:item_id>")
+@login_required
 def item_detalhe(item_id: int):
     item = db.session.get(EnxovalItem, item_id)
     if not item:
@@ -697,6 +811,7 @@ def item_detalhe(item_id: int):
 
 
 @main_bp.route("/item/<int:item_id>/editar", methods=["GET", "POST"])
+@login_required
 def editar_item(item_id: int):
     """Edita uma peça existente."""
     item = db.session.get(EnxovalItem, item_id)
@@ -738,6 +853,7 @@ def editar_item(item_id: int):
 
 
 @main_bp.route("/colaboradores/<int:colaborador_id>/editar", methods=["GET", "POST"])
+@login_required
 def editar_colaborador(colaborador_id: int):
     """Edita um colaborador existente."""
     colaborador = db.session.get(Colaborador, colaborador_id)
@@ -756,6 +872,7 @@ def editar_colaborador(colaborador_id: int):
 
 
 @main_bp.route("/setores/<int:setor_id>/editar", methods=["GET", "POST"])
+@login_required
 def editar_setor(setor_id: int):
     """Edita um setor existente."""
     setor = db.session.get(Setor, setor_id)
@@ -773,6 +890,7 @@ def editar_setor(setor_id: int):
 
 
 @main_bp.route("/tipos-peca/<int:tipo_id>/editar", methods=["GET", "POST"])
+@login_required
 def editar_tipo_peca(tipo_id: int):
     """Edita um tipo de peça existente."""
     tipo = db.session.get(TipoPeca, tipo_id)
@@ -790,6 +908,7 @@ def editar_tipo_peca(tipo_id: int):
 
 
 @main_bp.route("/importar", methods=["POST"])
+@login_required
 def importar_csv():
     """Importa dados de CSV."""
     arquivo = request.files.get("arquivo")
@@ -961,6 +1080,7 @@ def criar_colaborador():
 
 
 @main_bp.route("/colaboradores/<int:colaborador_id>/inativar", methods=["POST"])
+@login_required
 def inativar_colaborador(colaborador_id: int):
     colaborador = db.session.get(Colaborador, colaborador_id)
     if colaborador:
@@ -971,6 +1091,7 @@ def inativar_colaborador(colaborador_id: int):
 
 
 @main_bp.route("/relatorio/<periodo>")
+@login_required
 def relatorio_status(periodo: str):
     """Gera relatório de status (diario, semanal, mensal)."""
     from datetime import timedelta
@@ -1111,6 +1232,7 @@ def seed_tipos_peca():
 
 
 @main_bp.route("/qrcode/<int:item_id>")
+@login_required
 def gerar_qrcode(item_id: int):
     """Gera QR code para uma peça específica."""
     item = db.session.get(EnxovalItem, item_id)
@@ -1148,6 +1270,7 @@ def gerar_qrcode(item_id: int):
 
 
 @main_bp.route("/etiqueta/<int:item_id>")
+@login_required
 def etiqueta_item(item_id: int):
     """Mostra página de etiqueta para impressão."""
     item = db.session.get(EnxovalItem, item_id)
@@ -1158,6 +1281,7 @@ def etiqueta_item(item_id: int):
 
 
 @main_bp.route("/relatorio/<periodo>/pdf")
+@login_required
 def relatorio_pdf(periodo: str):
     """Gera relatório em PDF."""
     from io import BytesIO
@@ -1240,6 +1364,7 @@ def relatorio_pdf(periodo: str):
 
 
 @main_bp.route("/relatorio/<periodo>/excel")
+@login_required
 def relatorio_excel(periodo: str):
     """Gera relatório em Excel."""
     from io import BytesIO
@@ -1405,22 +1530,26 @@ def seed_tamanhos():
 
 # Admin management routes
 @main_bp.route("/gerenciar")
+@login_required
 def gerenciar():
     """Página principal de gerenciamento de cadastros."""
     colaboradores_ativos = Colaborador.query.filter_by(ativo=True).all()
     setores_ativos = Setor.query.filter_by(ativo=True).all()
     tipos_peca_ativos = TipoPeca.query.filter_by(ativo=True).all()
     tamanhos_ativos = Tamanho.query.filter_by(ativo=True).all()
+    usuarios = User.query.order_by(User.username.asc()).all()
     return render_template(
         "gerenciar.html",
         colaboradores_ativos=colaboradores_ativos,
         setores_ativos=setores_ativos,
         tipos_peca_ativos=tipos_peca_ativos,
         tamanhos_ativos=tamanhos_ativos,
+        usuarios=usuarios,
     )
 
 
 @main_bp.route("/gerenciar/colaboradores")
+@login_required
 def gerenciar_colaboradores():
     """Página de gerenciamento de colaboradores."""
     colaboradores = Colaborador.query.order_by(Colaborador.nome.asc()).all()
@@ -1428,6 +1557,7 @@ def gerenciar_colaboradores():
 
 
 @main_bp.route("/gerenciar/setores")
+@login_required
 def gerenciar_setores():
     """Página de gerenciamento de setores."""
     setores = Setor.query.order_by(Setor.nome.asc()).all()
@@ -1435,6 +1565,7 @@ def gerenciar_setores():
 
 
 @main_bp.route("/gerenciar/tipos")
+@login_required
 def gerenciar_tipos_peca():
     """Página de gerenciamento de tipos de peça."""
     tipos = TipoPeca.query.order_by(TipoPeca.nome.asc()).all()
@@ -1442,7 +1573,75 @@ def gerenciar_tipos_peca():
 
 
 @main_bp.route("/gerenciar/tamanhos")
+@login_required
 def gerenciar_tamanhos():
     """Página de gerenciamento de tamanhos."""
     tamanhos = Tamanho.query.order_by(Tamanho.nome.asc()).all()
     return render_template("gerenciar_tamanhos.html", tamanhos=tamanhos)
+
+
+@main_bp.route("/gerenciar/usuarios", methods=["GET", "POST"])
+@login_required
+def gerenciar_usuarios():
+    if not _exigir_admin():
+        return redirect(url_for("main.index"))
+
+    erro = None
+    sucesso = None
+    if request.method == "POST":
+        acao = request.form.get("acao")
+        if acao == "criar":
+            username = (request.form.get("username") or "").strip()
+            senha = (request.form.get("password") or "").strip()
+            is_admin = request.form.get("is_admin") == "on"
+            if not username or not senha:
+                erro = "Informe usuário e senha."
+            elif User.query.filter_by(username=username).first():
+                erro = "Já existe um usuário com este nome."
+            else:
+                erro_validacao = _validar_senha(senha)
+                if erro_validacao:
+                    erro = erro_validacao
+                else:
+                    novo = User(username=username, is_admin=is_admin)
+                    novo.set_password(senha)
+                    db.session.add(novo)
+                    db.session.commit()
+                    sucesso = "Usuário criado com sucesso."
+        elif acao == "senha":
+            user_id = request.form.get("user_id")
+            nova_senha = (request.form.get("new_password") or "").strip()
+            usuario = db.session.get(User, user_id)
+            if usuario and nova_senha:
+                erro_validacao = _validar_senha(nova_senha)
+                if erro_validacao:
+                    erro = erro_validacao
+                else:
+                    usuario.set_password(nova_senha)
+                    usuario.must_change_password = True
+                    db.session.add(usuario)
+                    db.session.commit()
+                    sucesso = "Senha atualizada."
+            else:
+                erro = "Informe a nova senha."
+        elif acao == "admin":
+            user_id = request.form.get("user_id")
+            usuario = db.session.get(User, user_id)
+            if usuario and usuario.id != current_user.id:
+                if usuario.is_admin and User.query.filter_by(is_admin=True).count() <= 1:
+                    erro = "É necessário manter ao menos um administrador."
+                else:
+                    usuario.is_admin = not usuario.is_admin
+                    db.session.add(usuario)
+                    db.session.commit()
+                    sucesso = "Permissão atualizada."
+            else:
+                erro = "Não é possível alterar seu próprio perfil aqui."
+
+    usuarios = User.query.order_by(User.username.asc()).all()
+    return render_template(
+        "gerenciar_usuarios.html",
+        usuarios=usuarios,
+        erro=erro,
+        sucesso=sucesso,
+    )

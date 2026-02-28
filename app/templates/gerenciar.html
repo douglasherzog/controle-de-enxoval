@@ -44,6 +44,15 @@
           <span class="badge-count">{{ tamanhos_ativos|length }} ativos</span>
         </div>
       </a>
+
+      <a href="{{ url_for('main.gerenciar_usuarios') }}" class="card-link">
+        <div class="card admin-card">
+          <div class="admin-icon">🔐</div>
+          <h3>Usuários</h3>
+          <p class="helper">Criar usuários, redefinir senha e permissões</p>
+          <span class="badge-count">{{ usuarios|length }} usuários</span>
+        </div>
+      </a>
     </div>
   </div>
 {% endblock %}

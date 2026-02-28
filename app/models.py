@@ -1,6 +1,8 @@
 from datetime import UTC, datetime
 
+from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import check_password_hash, generate_password_hash
 
 db = SQLAlchemy()
 
@@ -114,3 +116,20 @@ class Tamanho(db.Model):
 
     def __repr__(self) -> str:
         return f"<Tamanho {self.nome}>"
+
+
+class User(UserMixin, db.Model):
+    __tablename__ = "usuarios"
+
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    password_hash = db.Column(db.String(255), nullable=False)
+    is_admin = db.Column(db.Boolean, default=False, nullable=False)
+    must_change_password = db.Column(db.Boolean, default=False, nullable=False)
+    created_at = db.Column(db.DateTime, default=lambda: datetime.now(UTC))
+
+    def set_password(self, password: str) -> None:
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password: str) -> bool:
+        return check_password_hash(self.password_hash, password)

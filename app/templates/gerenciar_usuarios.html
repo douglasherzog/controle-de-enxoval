@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block title %}Gerenciar Usuários - Controle de Enxoval{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <a href="{{ url_for('main.gerenciar') }}" class="back-link">← Voltar ao gerenciamento</a>
+
+    <details class="quick-guide quick-guide--home">
+      <summary><span class="guide-icon">🔐</span>Guia rápido (clique para abrir)</summary>
+      <div class="guide-steps">
+        <div class="guide-step">
+          <span>1</span>
+          <p>Crie um usuário com senha forte para cada pessoa que terá acesso.</p>
+        </div>
+        <div class="guide-step">
+          <span>2</span>
+          <p>Se precisar, redefina a senha diretamente na tabela.</p>
+        </div>
+        <div class="guide-step">
+          <span>3</span>
+          <p>Mantenha ao menos um usuário administrador ativo.</p>
+        </div>
+      </div>
+    </details>
+
+    <section class="card span-full">
+      <h2>Gerenciar Usuários</h2>
+      <p class="helper">Crie usuários, redefina senhas e ajuste permissões de administrador.</p>
+      {% if erro %}
+        <p class="helper error-text">{{ erro }}</p>
+      {% endif %}
+      {% if sucesso %}
+        <p class="helper">✅ {{ sucesso }}</p>
+      {% endif %}
+      <form method="post" class="crud-form">
+        <input type="hidden" name="acao" value="criar">
+        <div class="form-row">
+          <div class="form-field">
+            <label for="username">Usuário</label>
+            <input id="username" name="username" placeholder="Ex.: joao" required>
+          </div>
+          <div class="form-field">
+            <label for="password">Senha</label>
+            <input id="password" name="password" type="password" placeholder="Defina uma senha" required>
+          </div>
+          <div class="form-field">
+            <label>
+              <input type="checkbox" name="is_admin"> Administrador
+            </label>
+          </div>
+        </div>
+        <button type="submit" class="btn-primary">Criar usuário</button>
+      </form>
+    </section>
+
+    <section class="card span-full">
+      <h3>Usuários cadastrados</h3>
+      <div class="table-wrapper">
+        <table class="crud-table">
+          <thead>
+            <tr>
+              <th>Usuário</th>
+              <th>Admin</th>
+              <th>Redefinir senha</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for user in usuarios %}
+              <tr>
+                <td>{{ user.username }}</td>
+                <td>
+                  <span class="badge {{ 'badge-success' if user.is_admin else 'badge-muted' }}">
+                    {{ 'Sim' if user.is_admin else 'Não' }}
+                  </span>
+                </td>
+                <td>
+                  <form method="post" class="inline-form">
+                    <input type="hidden" name="acao" value="senha">
+                    <input type="hidden" name="user_id" value="{{ user.id }}">
+                    <input name="new_password" type="password" placeholder="Nova senha" required>
+                    <button type="submit" class="btn-icon btn-warning" title="Salvar nova senha">💾</button>
+                  </form>
+                </td>
+                <td>
+                  <form method="post" class="inline-form">
+                    <input type="hidden" name="acao" value="admin">
+                    <input type="hidden" name="user_id" value="{{ user.id }}">
+                    <button type="submit" class="btn-icon" title="Alternar admin">
+                      {{ '✅' if user.is_admin else '⚙️' }}
+                    </button>
+                  </form>
+                </td>
+              </tr>
+            {% else %}
+              <tr>
+                <td colspan="4" class="muted">Nenhum usuário cadastrado.</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+{% endblock %}
