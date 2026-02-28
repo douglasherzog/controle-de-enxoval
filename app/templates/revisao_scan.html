@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="grid">
+    <section class="card span-full">
+      <a href="{{ url_for('main.revisao') }}" class="back-link">← Voltar para revisão</a>
+      <h3>Revisão por QR Code</h3>
+      <p class="helper">Use a câmera do celular para ler o QR Code e confirmar a peça.</p>
+
+      <div class="scanner-grid">
+        <div>
+          <label for="conferente">Nome do conferente</label>
+          <input id="conferente" name="conferente" placeholder="Ex.: Maria" required>
+        </div>
+
+        <video id="scanner" class="scanner-video" autoplay playsinline></video>
+
+        <div class="actions">
+          <button type="button" id="iniciar-scan">🎥 Iniciar câmera</button>
+          <button type="button" id="parar-scan" class="button secondary">⏹️ Parar</button>
+          <span class="scanner-status" id="scanner-status">Aguardando leitura.</span>
+        </div>
+
+        <div>
+          <label for="codigo-manual">Ou digite o código manualmente</label>
+          <div class="actions">
+            <input id="codigo-manual" placeholder="Ex.: JAL-0001">
+            <button type="button" id="enviar-manual" class="button secondary">Enviar</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const video = document.getElementById('scanner');
+    const iniciar = document.getElementById('iniciar-scan');
+    const parar = document.getElementById('parar-scan');
+    const statusEl = document.getElementById('scanner-status');
+    const conferenteInput = document.getElementById('conferente');
+    const manualInput = document.getElementById('codigo-manual');
+    const manualBtn = document.getElementById('enviar-manual');
+
+    let stream = null;
+    let detector = null;
+    let scanning = false;
+
+    async function enviarCodigo(codigo, raw = '') {
+      const conferente = (conferenteInput.value || '').trim();
+      if (!conferente) {
+        statusEl.textContent = 'Informe o conferente antes de confirmar.';
+        return;
+      }
+
+      statusEl.textContent = 'Registrando revisão...';
+      const response = await fetch("{{ url_for('main.revisao_scan') }}", {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ codigo, raw, conferente })
+      });
+      const data = await response.json();
+      statusEl.textContent = data.mensagem || 'Leitura concluída.';
+    }
+
+    async function iniciarCamera() {
+      if (scanning) return;
+      if (!('BarcodeDetector' in window)) {
+        statusEl.textContent = 'Leitor nativo não suportado. Use a digitação manual.';
+        return;
+      }
+
+      try {
+        stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+        video.srcObject = stream;
+        detector = new BarcodeDetector({ formats: ['qr_code'] });
+        scanning = true;
+        statusEl.textContent = 'Câmera ativa. Aponte para o QR Code.';
+        scanLoop();
+      } catch (err) {
+        statusEl.textContent = 'Não foi possível acessar a câmera.';
+      }
+    }
+
+    async function scanLoop() {
+      if (!scanning || !detector) return;
+      try {
+        const barcodes = await detector.detect(video);
+        if (barcodes.length > 0) {
+          const raw = barcodes[0].rawValue || '';
+          await enviarCodigo('', raw);
+        }
+      } catch (err) {
+        statusEl.textContent = 'Erro ao ler o QR Code.';
+      }
+      requestAnimationFrame(scanLoop);
+    }
+
+    function pararCamera() {
+      scanning = false;
+      if (stream) {
+        stream.getTracks().forEach(track => track.stop());
+      }
+      stream = null;
+      statusEl.textContent = 'Câmera pausada.';
+    }
+
+    iniciar.addEventListener('click', iniciarCamera);
+    parar.addEventListener('click', pararCamera);
+
+    manualBtn.addEventListener('click', () => {
+      const codigo = (manualInput.value || '').trim();
+      if (!codigo) {
+        statusEl.textContent = 'Digite o código da peça.';
+        return;
+      }
+      enviarCodigo(codigo);
+    });
+  });
+</script>
+{% endblock %}

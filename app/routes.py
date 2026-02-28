@@ -1,19 +1,30 @@
 import csv
 import io
+import os
 from datetime import UTC, datetime, timedelta
 from io import StringIO
 
 import qrcode
-from flask import Blueprint, redirect, render_template, request, send_file, url_for
+from flask import Blueprint, jsonify, redirect, render_template, request, send_file, url_for
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer, Table
-from sqlalchemy import func, or_
+from sqlalchemy import func, or_, text
 
-from .models import Colaborador, EnxovalItem, Movimentacao, Setor, Tamanho, TipoPeca, db
+from .models import (
+    Colaborador,
+    Configuracao,
+    EnxovalItem,
+    Movimentacao,
+    Revisao,
+    Setor,
+    Tamanho,
+    TipoPeca,
+    db,
+)
 
 STATUS_OPTIONS = [
     "estoque",
@@ -37,6 +48,28 @@ STATUS_COLORS = {
 
 
 main_bp = Blueprint("main", __name__)
+APP_START = datetime.now(UTC)
+
+
+def _format_uptime(delta: timedelta) -> str:
+    total_seconds = int(delta.total_seconds())
+    dias, resto = divmod(total_seconds, 86400)
+    horas, resto = divmod(resto, 3600)
+    minutos, _ = divmod(resto, 60)
+    if dias:
+        return f"{dias}d {horas}h {minutos}m"
+    if horas:
+        return f"{horas}h {minutos}m"
+    return f"{minutos}m"
+
+
+def _obter_configuracao() -> Configuracao:
+    config = Configuracao.query.order_by(Configuracao.id.asc()).first()
+    if not config:
+        config = Configuracao(periodicidade_revisao_dias=7)
+        db.session.add(config)
+        db.session.commit()
+    return config
 
 
 def _criar_item(
@@ -214,9 +247,12 @@ def index():
         else:
             itens_query = itens_query.filter(EnxovalItem.setor == filtro_setor)
     if filtro_colaborador:
-        itens_query = itens_query.filter(
-            EnxovalItem.colaborador.ilike(f"%{filtro_colaborador}%")
-        )
+        if filtro_colaborador == "__sem__":
+            itens_query = itens_query.filter(
+                or_(EnxovalItem.colaborador.is_(None), EnxovalItem.colaborador == "")
+            )
+        else:
+            itens_query = itens_query.filter(EnxovalItem.colaborador == filtro_colaborador)
 
     total_itens = itens_query.count()
     total_paginas = max((total_itens + por_pagina - 1) // por_pagina, 1)
@@ -229,6 +265,63 @@ def index():
         .limit(por_pagina)
         .all()
     )
+    tipos_peca_ativos = TipoPeca.query.filter_by(
+        ativo=True
+    ).order_by(TipoPeca.nome.asc()).all()
+    colaboradores_ativos = (
+        Colaborador.query.filter_by(ativo=True).order_by(Colaborador.nome.asc()).all()
+    )
+    setores_ativos = Setor.query.filter_by(ativo=True).order_by(Setor.nome.asc()).all()
+    tamanhos_ativos = Tamanho.query.filter_by(ativo=True).order_by(Tamanho.nome.asc()).all()
+    setores = Setor.query.order_by(Setor.nome.asc()).all()
+    config = _obter_configuracao()
+    limite_revisao = datetime.now(UTC) - timedelta(days=config.periodicidade_revisao_dias)
+    ultima_revisao_sub = (
+        db.session.query(
+            Revisao.item_id,
+            func.max(Revisao.created_at).label("ultima_revisao"),
+        )
+        .group_by(Revisao.item_id)
+        .subquery()
+    )
+    pendentes_revisao = (
+        db.session.query(func.count(EnxovalItem.id))
+        .outerjoin(ultima_revisao_sub, EnxovalItem.id == ultima_revisao_sub.c.item_id)
+        .filter(EnxovalItem.ativo.is_(True))
+        .filter(
+            or_(
+                ultima_revisao_sub.c.ultima_revisao.is_(None),
+                ultima_revisao_sub.c.ultima_revisao < limite_revisao,
+            )
+        )
+        .scalar()
+        or 0
+    )
+    return render_template(
+        "index.html",
+        itens=itens,
+        status_options=STATUS_OPTIONS,
+        tipos_peca_ativos=tipos_peca_ativos,
+        colaboradores_ativos=colaboradores_ativos,
+        setores=setores,
+        setores_ativos=setores_ativos,
+        tamanhos_ativos=tamanhos_ativos,
+        busca=busca,
+        filtro_status=filtro_status,
+        filtro_setor=filtro_setor,
+        filtro_colaborador=filtro_colaborador,
+        apenas_ativos=apenas_ativos,
+        pagina=pagina,
+        por_pagina=por_pagina,
+        total_itens=total_itens,
+        total_paginas=total_paginas,
+        offset=offset,
+        pendentes_revisao=pendentes_revisao,
+        periodicidade_revisao=config.periodicidade_revisao_dias,
+    )
+
+
+def _montar_dashboard_context() -> dict:
     status_counts = dict(
         db.session.query(EnxovalItem.status, func.count(EnxovalItem.id))
         .group_by(EnxovalItem.status)
@@ -243,7 +336,7 @@ def index():
         .scalar()
         or 0
     )
-    # Query para contar peças por tipo (todos os tipos existentes nas peças)
+
     por_tipo = (
         db.session.query(EnxovalItem.nome, func.count(EnxovalItem.id))
         .filter(EnxovalItem.ativo.is_(True))
@@ -251,11 +344,13 @@ def index():
         .order_by(EnxovalItem.nome.asc())
         .all()
     )
+
+    setor_expr = func.coalesce(func.nullif(EnxovalItem.setor, ""), "Sem setor").label("setor")
     por_setor = (
-        db.session.query(EnxovalItem.setor, func.count(EnxovalItem.id))
+        db.session.query(setor_expr, func.count(EnxovalItem.id))
         .filter(EnxovalItem.ativo.is_(True))
-        .group_by(EnxovalItem.setor)
-        .order_by(EnxovalItem.setor.asc())
+        .group_by(setor_expr)
+        .order_by(setor_expr.asc())
         .all()
     )
 
@@ -339,47 +434,234 @@ def index():
     )
     max_tipo = max((total for _, total in por_tipo), default=1)
     max_setor = max((total for _, total in por_setor), default=1)
-    tipos_peca_ativos = TipoPeca.query.filter_by(
-        ativo=True
-    ).order_by(TipoPeca.nome.asc()).all()
+
+    return {
+        "status_counts": status_counts,
+        "pendentes": pendentes,
+        "extraviados": extraviados,
+        "total_ativos": total_ativos,
+        "por_tipo": por_tipo,
+        "por_setor": por_setor,
+        "alerta_total": alerta_total,
+        "alertas_setor": alertas_setor,
+        "alertas_colaborador": alertas_colaborador,
+        "status_chart": status_chart,
+        "status_conic": status_conic,
+        "max_tipo": max_tipo,
+        "max_setor": max_setor,
+    }
+
+
+@main_bp.route("/dashboard")
+def dashboard():
+    """Página com gráficos e indicadores do enxoval."""
+    contexto = _montar_dashboard_context()
+    return render_template("dashboard.html", **contexto)
+
+
+@main_bp.route("/status")
+def status():
+    """Página simples de status do sistema."""
+    version = os.getenv("APP_VERSION", "dev")
+    uptime = _format_uptime(datetime.now(UTC) - APP_START)
+    db_ok = True
+    db_error = None
+    try:
+        db.session.execute(text("SELECT 1"))
+    except Exception as exc:  # noqa: BLE001
+        db_ok = False
+        db_error = str(exc)
+
+    return render_template(
+        "status.html",
+        version=version,
+        uptime=uptime,
+        db_ok=db_ok,
+        db_error=db_error,
+    )
+
+
+@main_bp.route("/revisao", methods=["GET", "POST"])
+def revisao():
+    """Tela de revisão rápida do enxoval."""
+    config = _obter_configuracao()
+    filtro_setor = (request.args.get("setor") or "").strip()
+    filtro_colaborador = (request.args.get("colaborador") or "").strip()
+
+    if request.method == "POST":
+        acao = request.form.get("acao")
+        next_url = request.form.get("next") or url_for(
+            "main.revisao",
+            setor=filtro_setor,
+            colaborador=filtro_colaborador,
+        )
+        if acao == "config":
+            try:
+                periodicidade = int(request.form.get("periodicidade") or 0)
+            except ValueError:
+                periodicidade = config.periodicidade_revisao_dias
+            if periodicidade <= 0:
+                periodicidade = config.periodicidade_revisao_dias
+            config.periodicidade_revisao_dias = periodicidade
+            db.session.add(config)
+            db.session.commit()
+            return redirect(next_url)
+        if acao == "conferir":
+            item_id = request.form.get("item_id")
+            conferente = (request.form.get("conferente") or "").strip()
+            item = db.session.get(EnxovalItem, item_id)
+            if item and conferente:
+                revisao = Revisao(
+                    item_id=item.id,
+                    conferente=conferente,
+                    setor=item.setor,
+                    colaborador=item.colaborador,
+                )
+                db.session.add(revisao)
+                db.session.commit()
+            return redirect(next_url)
+
+    limite = datetime.now(UTC) - timedelta(days=config.periodicidade_revisao_dias)
+    ultima_revisao_sub = (
+        db.session.query(
+            Revisao.item_id,
+            func.max(Revisao.created_at).label("ultima_revisao"),
+        )
+        .group_by(Revisao.item_id)
+        .subquery()
+    )
+
+    itens_query = (
+        db.session.query(EnxovalItem, ultima_revisao_sub.c.ultima_revisao)
+        .outerjoin(ultima_revisao_sub, EnxovalItem.id == ultima_revisao_sub.c.item_id)
+        .filter(EnxovalItem.ativo.is_(True))
+        .filter(
+            or_(
+                ultima_revisao_sub.c.ultima_revisao.is_(None),
+                ultima_revisao_sub.c.ultima_revisao < limite,
+            )
+        )
+    )
+
+    if filtro_setor:
+        if filtro_setor == "__sem__":
+            itens_query = itens_query.filter(
+                or_(EnxovalItem.setor.is_(None), EnxovalItem.setor == "")
+            )
+        else:
+            itens_query = itens_query.filter(EnxovalItem.setor == filtro_setor)
+    if filtro_colaborador:
+        if filtro_colaborador == "__sem__":
+            itens_query = itens_query.filter(
+                or_(EnxovalItem.colaborador.is_(None), EnxovalItem.colaborador == "")
+            )
+        else:
+            itens_query = itens_query.filter(EnxovalItem.colaborador == filtro_colaborador)
+
+    itens = itens_query.order_by(EnxovalItem.id.desc()).all()
+    setores_ativos = Setor.query.filter_by(ativo=True).order_by(Setor.nome.asc()).all()
     colaboradores_ativos = (
         Colaborador.query.filter_by(ativo=True).order_by(Colaborador.nome.asc()).all()
     )
-    setores_ativos = Setor.query.filter_by(ativo=True).order_by(Setor.nome.asc()).all()
-    tamanhos_ativos = Tamanho.query.filter_by(ativo=True).order_by(Tamanho.nome.asc()).all()
-    setores = Setor.query.order_by(Setor.nome.asc()).all()
+
     return render_template(
-        "index.html",
+        "revisao.html",
         itens=itens,
-        status_options=STATUS_OPTIONS,
-        status_counts=status_counts,
-        pendentes=pendentes,
-        extraviados=extraviados,
-        total_ativos=total_ativos,
-        por_tipo=por_tipo,
-        por_setor=por_setor,
-        alerta_total=alerta_total,
-        alertas_setor=alertas_setor,
-        alertas_colaborador=alertas_colaborador,
-        status_chart=status_chart,
-        status_conic=status_conic,
-        max_tipo=max_tipo,
-        max_setor=max_setor,
-        tipos_peca_ativos=tipos_peca_ativos,
-        colaboradores_ativos=colaboradores_ativos,
-        setores=setores,
-        setores_ativos=setores_ativos,
-        tamanhos_ativos=tamanhos_ativos,
-        busca=busca,
-        filtro_status=filtro_status,
+        config=config,
         filtro_setor=filtro_setor,
         filtro_colaborador=filtro_colaborador,
-        apenas_ativos=apenas_ativos,
-        pagina=pagina,
-        por_pagina=por_pagina,
-        total_itens=total_itens,
-        total_paginas=total_paginas,
-        offset=offset,
+        setores_ativos=setores_ativos,
+        colaboradores_ativos=colaboradores_ativos,
+    )
+
+
+@main_bp.route("/revisao/scan", methods=["GET", "POST"])
+def revisao_scan():
+    """Leitura por QR Code para revisão rápida."""
+    if request.method == "GET":
+        return render_template("revisao_scan.html")
+
+    dados = request.get_json() or {}
+    raw = (dados.get("raw") or "").strip()
+    codigo = (dados.get("codigo") or "").strip().upper()
+    conferente = (dados.get("conferente") or "").strip()
+
+    if not codigo and raw:
+        partes = raw.split("|")
+        for parte in partes:
+            if parte.upper().startswith("CODIGO:"):
+                codigo = parte.split(":", 1)[1].strip().upper()
+                break
+        if not codigo:
+            codigo = raw.strip().upper()
+
+    if not codigo:
+        return jsonify({"sucesso": False, "mensagem": "Código não identificado."}), 400
+    if not conferente:
+        return jsonify({"sucesso": False, "mensagem": "Informe o conferente."}), 400
+
+    item = EnxovalItem.query.filter_by(codigo=codigo).first()
+    if not item:
+        return jsonify(
+            {"sucesso": False, "mensagem": f"Peça {codigo} não encontrada."}
+        ), 404
+
+    revisao = Revisao(
+        item_id=item.id,
+        conferente=conferente,
+        setor=item.setor,
+        colaborador=item.colaborador,
+    )
+    db.session.add(revisao)
+    db.session.commit()
+
+    return jsonify(
+        {
+            "sucesso": True,
+            "mensagem": f"Peça {item.codigo} conferida.",
+            "item": {
+                "codigo": item.codigo,
+                "nome": item.nome,
+                "tamanho": item.tamanho,
+                "setor": item.setor,
+                "colaborador": item.colaborador,
+            },
+        }
+    )
+
+
+@main_bp.route("/revisoes/relatorio")
+def relatorio_revisoes():
+    """Relatório simples de revisões por período."""
+    try:
+        dias = int(request.args.get("dias", "7"))
+    except ValueError:
+        dias = 7
+    if dias <= 0:
+        dias = 7
+
+    inicio = datetime.now(UTC) - timedelta(days=dias)
+    revisoes = (
+        Revisao.query.filter(Revisao.created_at >= inicio)
+        .order_by(Revisao.created_at.desc())
+        .all()
+    )
+    total = len(revisoes)
+    por_conferente = (
+        db.session.query(Revisao.conferente, func.count(Revisao.id))
+        .filter(Revisao.created_at >= inicio)
+        .group_by(Revisao.conferente)
+        .order_by(func.count(Revisao.id).desc())
+        .all()
+    )
+
+    return render_template(
+        "relatorio_revisoes.html",
+        revisoes=revisoes,
+        total=total,
+        por_conferente=por_conferente,
+        dias=dias,
+        inicio=inicio,
     )
 
 
@@ -394,7 +676,24 @@ def item_detalhe(item_id: int):
         .order_by(Movimentacao.created_at.desc())
         .all()
     )
-    return render_template("item.html", item=item, movimentacoes=movimentacoes)
+    ultima_revisao = (
+        Revisao.query.filter_by(item_id=item_id)
+        .order_by(Revisao.created_at.desc())
+        .first()
+    )
+    revisoes_recentes = (
+        Revisao.query.filter_by(item_id=item_id)
+        .order_by(Revisao.created_at.desc())
+        .limit(5)
+        .all()
+    )
+    return render_template(
+        "item.html",
+        item=item,
+        movimentacoes=movimentacoes,
+        ultima_revisao=ultima_revisao,
+        revisoes_recentes=revisoes_recentes,
+    )
 
 
 @main_bp.route("/item/<int:item_id>/editar", methods=["GET", "POST"])
@@ -451,7 +750,7 @@ def editar_colaborador(colaborador_id: int):
 
         db.session.add(colaborador)
         db.session.commit()
-        return redirect(url_for("main.index"))
+        return redirect(url_for("main.gerenciar_colaboradores"))
 
     return render_template("editar_colaborador.html", colaborador=colaborador)
 
@@ -468,7 +767,7 @@ def editar_setor(setor_id: int):
 
         db.session.add(setor)
         db.session.commit()
-        return redirect(url_for("main.index"))
+        return redirect(url_for("main.gerenciar_setores"))
 
     return render_template("editar_setor.html", setor=setor)
 
@@ -540,7 +839,7 @@ def inativar_item(item_id: int):
         item.ativo = False
         db.session.add(item)
         db.session.commit()
-    return redirect(url_for("main.index"))
+    return redirect(request.referrer or url_for("main.index"))
 
 
 @main_bp.route("/movimentar/<int:item_id>", methods=["POST"])
@@ -634,6 +933,8 @@ def inativar_tipo_peca(tipo_id: int):
         tipo_peca.ativo = False
         db.session.add(tipo_peca)
         db.session.commit()
+        return redirect(url_for("main.gerenciar_tipos_peca"))
+
     return redirect(url_for("main.index"))
 
 
@@ -746,10 +1047,14 @@ def relatorio_status(periodo: str):
         .all()
     )
 
+    setor_expr = func.coalesce(func.nullif(EnxovalItem.setor, ""), "Sem setor")
     por_setor = (
-        db.session.query(EnxovalItem.setor, func.count(EnxovalItem.id))
+        db.session.query(
+            setor_expr.label("setor"),
+            func.count(EnxovalItem.id),
+        )
         .filter(EnxovalItem.ativo.is_(True))
-        .group_by(EnxovalItem.setor)
+        .group_by(setor_expr)
         .order_by(func.count(EnxovalItem.id).desc())
         .limit(10)
         .all()
@@ -1044,7 +1349,7 @@ def editar_tamanho(tamanho_id: int):
         tamanho.nome = (request.form.get("nome") or tamanho.nome).strip().upper()
         db.session.add(tamanho)
         db.session.commit()
-        return redirect(url_for("main.index"))
+        return redirect(url_for("main.gerenciar_tamanhos"))
 
     return render_template("editar_tamanho.html", tamanho=tamanho)
 
@@ -1070,7 +1375,7 @@ def excluir_item(item_id: int):
         # Excluir item
         db.session.delete(item)
         db.session.commit()
-    return redirect(url_for("main.index"))
+    return redirect(request.referrer or url_for("main.index"))
 
 
 @main_bp.route("/colaboradores/<int:colaborador_id>/excluir", methods=["POST"])
@@ -1096,3 +1401,48 @@ def seed_tamanhos():
             db.session.add(novo)
 
     db.session.commit()
+
+
+# Admin management routes
+@main_bp.route("/gerenciar")
+def gerenciar():
+    """Página principal de gerenciamento de cadastros."""
+    colaboradores_ativos = Colaborador.query.filter_by(ativo=True).all()
+    setores_ativos = Setor.query.filter_by(ativo=True).all()
+    tipos_peca_ativos = TipoPeca.query.filter_by(ativo=True).all()
+    tamanhos_ativos = Tamanho.query.filter_by(ativo=True).all()
+    return render_template(
+        "gerenciar.html",
+        colaboradores_ativos=colaboradores_ativos,
+        setores_ativos=setores_ativos,
+        tipos_peca_ativos=tipos_peca_ativos,
+        tamanhos_ativos=tamanhos_ativos,
+    )
+
+
+@main_bp.route("/gerenciar/colaboradores")
+def gerenciar_colaboradores():
+    """Página de gerenciamento de colaboradores."""
+    colaboradores = Colaborador.query.order_by(Colaborador.nome.asc()).all()
+    return render_template("gerenciar_colaboradores.html", colaboradores=colaboradores)
+
+
+@main_bp.route("/gerenciar/setores")
+def gerenciar_setores():
+    """Página de gerenciamento de setores."""
+    setores = Setor.query.order_by(Setor.nome.asc()).all()
+    return render_template("gerenciar_setores.html", setores=setores)
+
+
+@main_bp.route("/gerenciar/tipos")
+def gerenciar_tipos_peca():
+    """Página de gerenciamento de tipos de peça."""
+    tipos = TipoPeca.query.order_by(TipoPeca.nome.asc()).all()
+    return render_template("gerenciar_tipos.html", tipos=tipos)
+
+
+@main_bp.route("/gerenciar/tamanhos")
+def gerenciar_tamanhos():
+    """Página de gerenciamento de tamanhos."""
+    tamanhos = Tamanho.query.order_by(Tamanho.nome.asc()).all()
+    return render_template("gerenciar_tamanhos.html", tamanhos=tamanhos)

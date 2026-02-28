@@ -14,7 +14,43 @@
         <span><strong>Colaborador:</strong> {{ item.colaborador or '—' }}</span>
         <span><strong>Setor:</strong> {{ item.setor or '—' }}</span>
         <span><strong>Descrição:</strong> {{ item.descricao or '—' }}</span>
+        <span>
+          <strong>Última revisão:</strong>
+          {% if ultima_revisao %}
+            {{ ultima_revisao.created_at.strftime('%d/%m/%Y %H:%M') }} · {{ ultima_revisao.conferente }}
+          {% else %}
+            —
+          {% endif %}
+        </span>
       </div>
+    </section>
+
+    <section class="card">
+      <h3>Revisões recentes</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Conferente</th>
+            <th>Setor</th>
+            <th>Colaborador</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for rev in revisoes_recentes %}
+            <tr>
+              <td>{{ rev.created_at.strftime('%d/%m/%Y %H:%M') }}</td>
+              <td>{{ rev.conferente }}</td>
+              <td>{{ rev.setor or '—' }}</td>
+              <td>{{ rev.colaborador or '—' }}</td>
+            </tr>
+          {% else %}
+            <tr>
+              <td colspan="4" class="muted">Nenhuma revisão registrada.</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </section>
 
     <section class="card">

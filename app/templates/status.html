@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="grid">
+    <section class="card span-full">
+      <a href="{{ url_for('main.index') }}" class="back-link">← Voltar ao início</a>
+      <h3>Status do sistema</h3>
+      <p class="helper">Monitoramento rápido do serviço e do banco.</p>
+
+      <div class="summary">
+        <div class="summary-card">
+          <span class="label">Versão</span>
+          <strong>{{ version }}</strong>
+        </div>
+        <div class="summary-card">
+          <span class="label">Uptime</span>
+          <strong>{{ uptime }}</strong>
+        </div>
+        <div class="summary-card">
+          <span class="label">Banco de dados</span>
+          {% if db_ok %}
+            <strong>✅ Conectado</strong>
+          {% else %}
+            <strong>❌ Indisponível</strong>
+          {% endif %}
+        </div>
+      </div>
+
+      {% if not db_ok and db_error %}
+        <div class="meta">
+          <span class="label">Detalhe</span>
+          <span class="muted">{{ db_error }}</span>
+        </div>
+      {% endif %}
+
+      <div class="actions spaced">
+        <a href="{{ url_for('main.dashboard') }}" class="button">📊 Ir para Dashboard</a>
+        <a href="{{ url_for('main.gerenciar') }}" class="button secondary">⚙️ Cadastros</a>
+      </div>
+    </section>
+  </div>
+{% endblock %}

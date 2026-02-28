@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block title %}Gerenciar Colaboradores - Controle de Enxoval{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="page-header">
+      <a href="{{ url_for('main.gerenciar') }}" class="back-link">← Voltar ao Gerenciamento</a>
+      <h1>Colaboradores</h1>
+      <p class="muted">Gerencie os colaboradores do sistema</p>
+    </div>
+
+    <details class="quick-guide quick-guide--colaboradores">
+      <summary><span class="guide-icon">👥</span>Guia rápido (clique para abrir)</summary>
+      <div class="guide-steps">
+        <div class="guide-step">
+          <span>1</span>
+          <p>Cadastre o colaborador com nome e telefone (ex.: João Silva · (51) 99999-9999).</p>
+        </div>
+        <div class="guide-step">
+          <span>2</span>
+          <p>Use ✏️ para corrigir dados, 🚫 para inativar e 🗑️ para excluir permanentemente.</p>
+        </div>
+        <div class="guide-step">
+          <span>3</span>
+          <p>Inativos continuam no histórico, mas não aparecem nas novas seleções de movimentação.</p>
+        </div>
+        <div class="guide-step">
+          <span>4</span>
+          <p>Se houver colaboradores duplicados, edite o nome para padronizar.</p>
+        </div>
+      </div>
+    </details>
+
+    <div class="crud-section">
+      <h2>Cadastrar Novo Colaborador</h2>
+      <form method="post" action="{{ url_for('main.criar_colaborador') }}" class="crud-form">
+        <div class="form-row">
+          <div class="form-field">
+            <label for="nome">Nome do Colaborador</label>
+            <input id="nome" name="nome" placeholder="Ex.: João Silva" required>
+          </div>
+          <div class="form-field">
+            <label for="telefone">Telefone (opcional)</label>
+            <input id="telefone" name="telefone" placeholder="Ex.: (51) 99999-9999">
+          </div>
+        </div>
+        <button type="submit" class="btn-primary">Cadastrar</button>
+      </form>
+    </div>
+
+    <div class="crud-section">
+      <h2>Lista de Colaboradores</h2>
+      
+      {% if colaboradores %}
+        <div class="table-wrapper">
+          <table class="crud-table">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Telefone</th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for colaborador in colaboradores %}
+                <tr class="{% if not colaborador.ativo %}inativo{% endif %}">
+                  <td>{{ colaborador.nome }}</td>
+                  <td>{{ colaborador.telefone or '-' }}</td>
+                  <td>
+                    {% if colaborador.ativo %}
+                      <span class="badge badge-success">Ativo</span>
+                    {% else %}
+                      <span class="badge badge-muted">Inativo</span>
+                    {% endif %}
+                  </td>
+                  <td class="actions">
+                    <a href="{{ url_for('main.editar_colaborador', colaborador_id=colaborador.id) }}" class="btn-icon" title="Editar">✏️</a>
+                    {% if colaborador.ativo %}
+                      <form method="post" action="{{ url_for('main.inativar_colaborador', colaborador_id=colaborador.id) }}" class="inline-form">
+                        <button type="submit" class="btn-icon btn-warning" title="Inativar" onclick="return confirm('Tem certeza que deseja inativar este colaborador?')">🚫</button>
+                      </form>
+                    {% endif %}
+                    <form method="post" action="{{ url_for('main.excluir_colaborador', colaborador_id=colaborador.id) }}" class="inline-form">
+                      <button type="submit" class="btn-icon btn-danger" title="Excluir permanentemente" onclick="return confirm('Tem certeza que deseja EXCLUIR permanentemente este colaborador? Esta ação não pode ser desfeita!')">🗑️</button>
+                    </form>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% else %}
+        <div class="empty-state">
+          <div class="empty-icon">👥</div>
+          <p>Nenhum colaborador cadastrado.</p>
+          <p class="helper">Use o formulário acima para cadastrar o primeiro colaborador.</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

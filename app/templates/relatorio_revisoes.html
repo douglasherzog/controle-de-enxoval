@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="grid">
+    <section class="card span-full">
+      <a href="{{ url_for('main.revisao') }}" class="back-link">← Voltar para revisão</a>
+      <h3>Relatório de revisões</h3>
+      <p class="helper">Período: últimos {{ dias }} dias (desde {{ inicio.strftime('%d/%m/%Y') }}).</p>
+
+      <form method="get" class="filters" action="{{ url_for('main.relatorio_revisoes') }}">
+        <div>
+          <label for="dias">Período (dias)</label>
+          <input id="dias" name="dias" type="number" min="1" value="{{ dias }}" required>
+        </div>
+        <button type="submit">Atualizar</button>
+      </form>
+    </section>
+
+    <section class="card span-full">
+      <h3>Resumo</h3>
+      <div class="summary">
+        <div class="summary-card">
+          <span class="label">Total de revisões</span>
+          <strong>{{ total }}</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="card span-full">
+      <h3>Por conferente</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Conferente</th>
+            <th>Quantidade</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for conferente, quantidade in por_conferente %}
+            <tr>
+              <td>{{ conferente }}</td>
+              <td>{{ quantidade }}</td>
+            </tr>
+          {% else %}
+            <tr>
+              <td colspan="2" class="muted">Nenhuma revisão no período.</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card span-full">
+      <h3>Revisões recentes</h3>
+      <div class="table-scroll">
+        <table class="main-table">
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Conferente</th>
+              <th>Peça</th>
+              <th>Setor</th>
+              <th>Colaborador</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for rev in revisoes %}
+              <tr>
+                <td>{{ rev.created_at.strftime('%d/%m/%Y %H:%M') }}</td>
+                <td>{{ rev.conferente }}</td>
+                <td>{{ rev.item.codigo }} · {{ rev.item.nome }}</td>
+                <td>{{ rev.setor or '—' }}</td>
+                <td>{{ rev.colaborador or '—' }}</td>
+              </tr>
+            {% else %}
+              <tr>
+                <td colspan="5" class="muted">Nenhuma revisão registrada.</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+{% endblock %}

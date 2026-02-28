@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}Gerenciar Setores - Controle de Enxoval{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="page-header">
+      <a href="{{ url_for('main.gerenciar') }}" class="back-link">← Voltar ao Gerenciamento</a>
+      <h1>Setores</h1>
+      <p class="muted">Gerencie os setores do frigorífico</p>
+    </div>
+
+    <details class="quick-guide quick-guide--setores">
+      <summary><span class="guide-icon">🏢</span>Guia rápido (clique para abrir)</summary>
+      <div class="guide-steps">
+        <div class="guide-step">
+          <span>1</span>
+          <p>Cadastre setores para o dropdown de movimentação (ex.: Desossa, Embalagem, Qualidade).</p>
+        </div>
+        <div class="guide-step">
+          <span>2</span>
+          <p>Use ✏️ para corrigir nomes e 🚫 para inativar setores antigos que não existem mais.</p>
+        </div>
+        <div class="guide-step">
+          <span>3</span>
+          <p>Setores inativos não aparecem no cadastro, mas continuam no histórico das peças.</p>
+        </div>
+        <div class="guide-step">
+          <span>4</span>
+          <p>Evite duplicar grafias (ex.: "Desossa" e "desossa").</p>
+        </div>
+      </div>
+    </details>
+
+    <div class="crud-section">
+      <h2>Cadastrar Novo Setor</h2>
+      <form method="post" action="{{ url_for('main.criar_setor') }}" class="crud-form">
+        <div class="form-row">
+          <div class="form-field">
+            <label for="nome">Nome do Setor</label>
+            <input id="nome" name="nome" placeholder="Ex.: Desossa, Embalagem, etc." required>
+          </div>
+        </div>
+        <button type="submit" class="btn-primary">Cadastrar</button>
+      </form>
+    </div>
+
+    <div class="crud-section">
+      <h2>Lista de Setores</h2>
+      
+      {% if setores %}
+        <div class="table-wrapper">
+          <table class="crud-table">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for setor in setores %}
+                <tr class="{% if not setor.ativo %}inativo{% endif %}">
+                  <td>{{ setor.nome }}</td>
+                  <td>
+                    {% if setor.ativo %}
+                      <span class="badge badge-success">Ativo</span>
+                    {% else %}
+                      <span class="badge badge-muted">Inativo</span>
+                    {% endif %}
+                  </td>
+                  <td class="actions">
+                    <a href="{{ url_for('main.editar_setor', setor_id=setor.id) }}" class="btn-icon" title="Editar">✏️</a>
+                    {% if setor.ativo %}
+                      <form method="post" action="{{ url_for('main.inativar_setor', setor_id=setor.id) }}" class="inline-form">
+                        <button type="submit" class="btn-icon btn-warning" title="Inativar" onclick="return confirm('Tem certeza que deseja inativar este setor?')">🚫</button>
+                      </form>
+                    {% endif %}
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% else %}
+        <div class="empty-state">
+          <div class="empty-icon">🏢</div>
+          <p>Nenhum setor cadastrado.</p>
+          <p class="helper">Use o formulário acima para cadastrar o primeiro setor.</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="grid">
+    <details class="quick-guide quick-guide--home">
+      <summary><span class="guide-icon">✅</span>Guia rápido (clique para abrir)</summary>
+      <div class="guide-steps">
+        <div class="guide-step">
+          <span>1</span>
+          <p>Defina a periodicidade (ex.: 7 dias). Peças sem revisão recente aparecerão aqui.</p>
+        </div>
+        <div class="guide-step">
+          <span>2</span>
+          <p>Filtre por setor ou colaborador e informe o nome do conferente.</p>
+        </div>
+        <div class="guide-step">
+          <span>3</span>
+          <p>Clique em <strong>Conferir</strong> para registrar a revisão da peça.</p>
+        </div>
+      </div>
+    </details>
+
+    <section class="card span-full">
+      <a href="{{ url_for('main.index') }}" class="back-link">← Voltar ao painel</a>
+      <h3>Revisão rápida do enxoval</h3>
+      <p class="helper">Lista de peças pendentes de revisão pela periodicidade definida.</p>
+
+      <form method="post" class="filters" action="{{ url_for('main.revisao', setor=filtro_setor, colaborador=filtro_colaborador) }}">
+        <input type="hidden" name="acao" value="config">
+        <div>
+          <label for="periodicidade">Periodicidade (dias)</label>
+          <input id="periodicidade" name="periodicidade" type="number" min="1" value="{{ config.periodicidade_revisao_dias }}" required>
+        </div>
+        <button type="submit">Salvar periodicidade</button>
+      </form>
+    </section>
+
+    <section class="card span-full">
+      <h3>Filtros e conferente</h3>
+      <form method="get" class="filters" action="{{ url_for('main.revisao') }}">
+        <div>
+          <label for="setor">Setor</label>
+          <select id="setor" name="setor">
+            <option value="">Todos</option>
+            <option value="__sem__" {% if filtro_setor == "__sem__" %}selected{% endif %}>Sem setor</option>
+            {% for setor in setores_ativos %}
+              <option value="{{ setor.nome }}" {% if setor.nome == filtro_setor %}selected{% endif %}>{{ setor.nome }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div>
+          <label for="colaborador">Colaborador</label>
+          <select id="colaborador" name="colaborador">
+            <option value="">Todos</option>
+            <option value="__sem__" {% if filtro_colaborador == "__sem__" %}selected{% endif %}>Sem colaborador</option>
+            {% for colaborador in colaboradores_ativos %}
+              <option value="{{ colaborador.nome }}" {% if colaborador.nome == filtro_colaborador %}selected{% endif %}>{{ colaborador.nome }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <button type="submit">Aplicar filtros</button>
+        <a href="{{ url_for('main.revisao_scan') }}" class="button secondary">📷 Revisar por QR Code</a>
+      </form>
+    </section>
+
+    <section class="card span-full" id="lista-revisao">
+      <h3>Peças pendentes</h3>
+      <p class="helper">Informe o conferente e confirme as peças.</p>
+
+      <div class="table-scroll">
+        <div class="main-table-wrapper">
+          <table class="main-table">
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Peça</th>
+                <th>Última revisão</th>
+                <th>Conferente</th>
+                <th>Ação</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item, ultima in itens %}
+                <tr>
+                  <td>{{ item.codigo }}</td>
+                  <td>
+                    <strong>{{ item.nome }}</strong><br>
+                    <span class="muted">{{ item.tamanho }}{% if item.colaborador %} · {{ item.colaborador }}{% endif %}{% if item.setor %} · {{ item.setor }}{% endif %}</span>
+                  </td>
+                  <td>
+                    {% if ultima %}
+                      {{ ultima.strftime('%d/%m/%Y %H:%M') }}
+                    {% else %}
+                      <span class="muted">Nunca revisada</span>
+                    {% endif %}
+                  </td>
+                  <td>
+                    <form method="post" action="{{ url_for('main.revisao', setor=filtro_setor, colaborador=filtro_colaborador) }}" class="inline-form">
+                      <input type="hidden" name="acao" value="conferir">
+                      <input type="hidden" name="item_id" value="{{ item.id }}">
+                      <input type="hidden" name="next" value="{{ url_for('main.revisao', setor=filtro_setor, colaborador=filtro_colaborador) }}#lista-revisao">
+                      <input name="conferente" placeholder="Nome do conferente" required>
+                  </td>
+                  <td>
+                      <button type="submit">Conferir</button>
+                    </form>
+                  </td>
+                </tr>
+              {% else %}
+                <tr>
+                  <td colspan="5" class="muted">Nenhuma peça pendente para esta periodicidade.</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </div>
+{% endblock %}

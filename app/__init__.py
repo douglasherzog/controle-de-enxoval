@@ -1,6 +1,6 @@
 from flask import Flask
 
-from .models import db
+from .models import Configuracao, db
 from .rfid import rfid_bp
 from .routes import main_bp, seed_tamanhos, seed_tipos_peca
 
@@ -21,6 +21,9 @@ def create_app(config_overrides: dict | None = None) -> Flask:
 
     with app.app_context():
         db.create_all()
+        if not Configuracao.query.first():
+            db.session.add(Configuracao(periodicidade_revisao_dias=7))
+            db.session.commit()
         seed_tipos_peca()
         seed_tamanhos()
 

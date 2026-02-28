@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}Gerenciar Tipos de Peça - Controle de Enxoval{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="page-header">
+      <a href="{{ url_for('main.gerenciar') }}" class="back-link">← Voltar ao Gerenciamento</a>
+      <h1>Tipos de Peça</h1>
+      <p class="muted">Gerencie os tipos de peças do enxoval</p>
+    </div>
+
+    <details class="quick-guide quick-guide--tipos">
+      <summary><span class="guide-icon">👕</span>Guia rápido (clique para abrir)</summary>
+      <div class="guide-steps">
+        <div class="guide-step">
+          <span>1</span>
+          <p>Cadastre novos tipos com nomes claros (ex.: Moletom, Bata manga curta azul).</p>
+        </div>
+        <div class="guide-step">
+          <span>2</span>
+          <p>Use ✏️ para corrigir nomes e 🚫 para inativar tipos que não devem mais ser usados.</p>
+        </div>
+        <div class="guide-step">
+          <span>3</span>
+          <p>Tipos inativos não aparecem nos novos cadastros, mas ficam no histórico.</p>
+        </div>
+        <div class="guide-step">
+          <span>4</span>
+          <p>Evite duplicar nomes com plural/singular (ex.: Bata vs Batas).</p>
+        </div>
+      </div>
+    </details>
+
+    <div class="crud-section">
+      <h2>Cadastrar Novo Tipo</h2>
+      <form method="post" action="{{ url_for('main.criar_tipo_peca') }}" class="crud-form">
+        <div class="form-row">
+          <div class="form-field">
+            <label for="nome">Nome do Tipo</label>
+            <input id="nome" name="nome" placeholder="Ex.: Jaleco térmico, Camisa NR10, etc." required>
+          </div>
+        </div>
+        <button type="submit" class="btn-primary">Cadastrar</button>
+      </form>
+    </div>
+
+    <div class="crud-section">
+      <h2>Lista de Tipos</h2>
+      
+      {% if tipos %}
+        <div class="table-wrapper">
+          <table class="crud-table">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for tipo in tipos %}
+                <tr class="{% if not tipo.ativo %}inativo{% endif %}">
+                  <td>{{ tipo.nome }}</td>
+                  <td>
+                    {% if tipo.ativo %}
+                      <span class="badge badge-success">Ativo</span>
+                    {% else %}
+                      <span class="badge badge-muted">Inativo</span>
+                    {% endif %}
+                  </td>
+                  <td class="actions">
+                    <a href="{{ url_for('main.editar_tipo_peca', tipo_id=tipo.id) }}" class="btn-icon" title="Editar">✏️</a>
+                    {% if tipo.ativo %}
+                      <form method="post" action="{{ url_for('main.inativar_tipo_peca', tipo_id=tipo.id) }}" class="inline-form">
+                        <button type="submit" class="btn-icon btn-warning" title="Inativar" onclick="return confirm('Tem certeza que deseja inativar este tipo?')">🚫</button>
+                      </form>
+                    {% endif %}
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% else %}
+        <div class="empty-state">
+          <div class="empty-icon">👕</div>
+          <p>Nenhum tipo cadastrado.</p>
+          <p class="helper">Use o formulário acima para cadastrar o primeiro tipo.</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

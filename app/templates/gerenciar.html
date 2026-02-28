@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Gerenciar Cadastros - Controle de Enxoval{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <a href="{{ url_for('main.index') }}" class="back-link">← Voltar ao Dashboard</a>
+    <h1>Gerenciar Cadastros</h1>
+    <p class="muted">Escolha qual cadastro deseja gerenciar</p>
+
+    <div class="grid-2 admin-grid">
+      <a href="{{ url_for('main.gerenciar_colaboradores') }}" class="card-link">
+        <div class="card admin-card">
+          <div class="admin-icon">👥</div>
+          <h3>Colaboradores</h3>
+          <p class="helper">Cadastrar, editar e excluir colaboradores</p>
+          <span class="badge-count">{{ colaboradores_ativos|length }} ativos</span>
+        </div>
+      </a>
+
+      <a href="{{ url_for('main.gerenciar_setores') }}" class="card-link">
+        <div class="card admin-card">
+          <div class="admin-icon">🏢</div>
+          <h3>Setores</h3>
+          <p class="helper">Cadastrar, editar e inativar setores</p>
+          <span class="badge-count">{{ setores_ativos|length }} ativos</span>
+        </div>
+      </a>
+
+      <a href="{{ url_for('main.gerenciar_tipos_peca') }}" class="card-link">
+        <div class="card admin-card">
+          <div class="admin-icon">👕</div>
+          <h3>Tipos de Peça</h3>
+          <p class="helper">Cadastrar, editar e inativar tipos</p>
+          <span class="badge-count">{{ tipos_peca_ativos|length }} ativos</span>
+        </div>
+      </a>
+
+      <a href="{{ url_for('main.gerenciar_tamanhos') }}" class="card-link">
+        <div class="card admin-card">
+          <div class="admin-icon">📏</div>
+          <h3>Tamanhos</h3>
+          <p class="helper">Cadastrar, editar e inativar tamanhos</p>
+          <span class="badge-count">{{ tamanhos_ativos|length }} ativos</span>
+        </div>
+      </a>
+    </div>
+  </div>
+{% endblock %}

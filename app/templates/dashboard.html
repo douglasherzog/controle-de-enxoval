@@ -1,0 +1,214 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - Controle de Enxoval{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <a href="{{ url_for('main.index') }}" class="back-link">← Voltar ao Cadastro</a>
+    <h1>Dashboard de Gráficos</h1>
+    <p class="muted">Indicadores e relatórios consolidados do enxoval.</p>
+  </div>
+
+  <div class="grid">
+    <section class="summary">
+      <div class="summary-card">
+        <span class="label">Peças ativas</span>
+        <strong>{{ total_ativos }}</strong>
+      </div>
+      <div class="summary-card">
+        <span class="label">Pendentes de retorno</span>
+        <strong>{{ pendentes }}</strong>
+      </div>
+      <div class="summary-card">
+        <span class="label">Extraviadas</span>
+        <strong>{{ extraviados }}</strong>
+      </div>
+      <div class="summary-card">
+        <span class="label">Em estoque</span>
+        <strong>{{ status_counts.get('estoque', 0) }}</strong>
+      </div>
+    </section>
+
+    <section class="card span-full">
+      <h3>Alertas automáticos</h3>
+      <p class="helper">Peças em uso/entregues sem movimentação há mais de 2 dias.</p>
+      <div class="alert-grid">
+        <div class="summary-card">
+          <span class="label">Atenção (2+ dias)</span>
+          <strong class="badge alerta">{{ alerta_total.atencao }}</strong>
+        </div>
+        <div class="summary-card">
+          <span class="label">Crítico (4+ dias)</span>
+          <strong class="badge critico">{{ alerta_total.critico }}</strong>
+        </div>
+      </div>
+      <div class="grid">
+        <section class="card span-2">
+          <h4>Por setor</h4>
+          <div class="alert-table-wrapper">
+            <table class="alert-table">
+              <thead>
+                <tr>
+                  <th>Setor</th>
+                  <th>Atenção</th>
+                  <th>Crítico</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for setor, atencao, critico, total in alertas_setor %}
+                  <tr>
+                    <td>{{ setor }}</td>
+                    <td>{{ atencao }}</td>
+                    <td>{{ critico }}</td>
+                    <td>{{ total }}</td>
+                  </tr>
+                {% else %}
+                  <tr>
+                    <td colspan="4" class="muted">Sem alertas no momento.</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+              </table>
+        </div>
+          </div>
+        </section>
+        <section class="card span-2">
+          <h4>Por colaborador</h4>
+          <div class="alert-table-wrapper">
+            <table class="alert-table">
+              <thead>
+                <tr>
+                  <th>Colaborador</th>
+                  <th>Atenção</th>
+                  <th>Crítico</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for colaborador, atencao, critico, total in alertas_colaborador %}
+                  <tr>
+                    <td>{{ colaborador }}</td>
+                    <td>{{ atencao }}</td>
+                    <td>{{ critico }}</td>
+                    <td>{{ total }}</td>
+                  </tr>
+                {% else %}
+                  <tr>
+                    <td colspan="4" class="muted">Sem alertas no momento.</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="card span-full">
+      <h3>Dashboard com gráficos</h3>
+      <div class="chart-grid">
+        <section class="card">
+          <h4>Status do enxoval</h4>
+          <div class="donut" data-conic="{{ status_conic }}"></div>
+          <div class="legend">
+            {% for item in status_chart %}
+              <div class="legend-item">
+                <span class="legend-dot" data-color="{{ item.color }}"></span>
+                <span>{{ item.status|replace('_', ' ') }} ({{ item.quantidade }})</span>
+              </div>
+            {% endfor %}
+          </div>
+        </section>
+        <section class="card">
+          <h4>Por tipo</h4>
+          {% for tipo, total in por_tipo %}
+            <div class="bar-row">
+              <div class="bar-label">
+                <span>{{ tipo }}</span>
+                <span>{{ total }}</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill" data-width="{% if max_tipo > 0 %}{{ (total / max_tipo) * 100 }}{% else %}0{% endif %}"></div>
+              </div>
+            </div>
+          {% endfor %}
+        </section>
+        <section class="card">
+          <h4>Por setor</h4>
+          {% for setor, total in por_setor %}
+            <div class="bar-row">
+              <div class="bar-label">
+                <span>{{ setor or 'Sem setor' }}</span>
+                <span>{{ total }}</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill" data-width="{% if max_setor > 0 %}{{ (total / max_setor) * 100 }}{% else %}0{% endif %}"></div>
+              </div>
+            </div>
+          {% endfor %}
+        </section>
+      </div>
+    </section>
+
+    <section class="card span-full">
+      <h3>Inventário por tipo</h3>
+      <p class="helper">Mostra quantas peças ativas existem por tipo (moletom, calça, bata...).</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Tipo</th>
+            <th>Quantidade</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for tipo, total in por_tipo %}
+            <tr>
+              <td>{{ tipo }}</td>
+              <td>{{ total }}</td>
+            </tr>
+          {% else %}
+            <tr>
+              <td colspan="2" class="muted">Sem dados.</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card span-full">
+      <h3>Inventário por setor</h3>
+      <p class="helper">Ajuda a ver onde o enxoval está concentrado no frigorífico.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Setor</th>
+            <th>Quantidade</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for setor, total in por_setor %}
+            <tr>
+              <td>{{ setor or 'Sem setor' }}</td>
+              <td>{{ total }}</td>
+            </tr>
+          {% else %}
+            <tr>
+              <td colspan="2" class="muted">Sem dados.</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card span-full">
+      <h3>Relatórios Periódicos</h3>
+      <p class="helper">Gere relatórios de status para acompanhamento.</p>
+      <div class="actions">
+        <a href="{{ url_for('main.relatorio_status', periodo='diario') }}" class="button">📊 Diário</a>
+        <a href="{{ url_for('main.relatorio_status', periodo='semanal') }}" class="button">📈 Semanal</a>
+        <a href="{{ url_for('main.relatorio_status', periodo='mensal') }}" class="button">📉 Mensal</a>
+      </div>
+    </section>
+  </div>
+{% endblock %}

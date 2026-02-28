@@ -46,6 +46,27 @@ class Movimentacao(db.Model):
     item = db.relationship("EnxovalItem", back_populates="movimentacoes")
 
 
+class Configuracao(db.Model):
+    __tablename__ = "configuracoes"
+
+    id = db.Column(db.Integer, primary_key=True)
+    periodicidade_revisao_dias = db.Column(db.Integer, default=7, nullable=False)
+    created_at = db.Column(db.DateTime, default=lambda: datetime.now(UTC))
+
+
+class Revisao(db.Model):
+    __tablename__ = "revisoes"
+
+    id = db.Column(db.Integer, primary_key=True)
+    item_id = db.Column(db.Integer, db.ForeignKey("enxoval_items.id"), nullable=False)
+    conferente = db.Column(db.String(120), nullable=False)
+    setor = db.Column(db.String(120), nullable=True)
+    colaborador = db.Column(db.String(120), nullable=True)
+    created_at = db.Column(db.DateTime, default=lambda: datetime.now(UTC))
+
+    item = db.relationship("EnxovalItem")
+
+
 class Setor(db.Model):
     __tablename__ = "setores"
 
