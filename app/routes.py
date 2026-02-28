@@ -205,7 +205,8 @@ def alterar_senha():
                 current_user.must_change_password = False
                 db.session.add(current_user)
                 db.session.commit()
-                sucesso = "Senha atualizada com sucesso."
+                logout_user()
+                return redirect(url_for("main.login"))
 
     return render_template(
         "alterar_senha.html",
